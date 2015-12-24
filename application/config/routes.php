@@ -42,5 +42,8 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
+$route['categorias'] = 'categoria/index'; //si pone categorias, va al index de categorias
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

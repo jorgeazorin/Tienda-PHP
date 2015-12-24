@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Agenda extends CI_Controller {
+class Categoria extends CI_Controller {
 
   function __construc(){
     parent::__construc();
@@ -10,12 +10,12 @@ class Agenda extends CI_Controller {
   public function index()
 	{
 
-    $this->load->model("Agenda_m",'', TRUE);
-    $data['titulo']="Listado de la agenda";
+    $this->load->model("Categoria_m",'', TRUE);
+    $data['titulo']="Listado de categorías";
     //$data['cuantos']=$this->Agenda_m->count_all();
-    $data['lista']=$this->Agenda_m->get_all();
+    $data['lista']=$this->Categoria_m->view();
 
-		$this->load->view('agenda/index', $data);
+		$this->load->view('categorias/index', $data);
 
 	}
 
