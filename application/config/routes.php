@@ -43,6 +43,7 @@ $route['404_override'] = '';
 
 
 $route['categorias'] = 'categoria/index'; //si pone categorias, va al index de categorias
+$route['categorias/crear'] = 'categoria/nuevo';
 
 
 /* End of file routes.php */
