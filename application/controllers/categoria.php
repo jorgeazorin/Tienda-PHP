@@ -19,4 +19,11 @@ class Categoria extends CI_Controller {
 
 	}
 
+  public function nuevo()
+  {
+    $this->load->model("Categoria_m",'', TRUE);
+    $nombre = $_POST['nuevacat'];
+    $this->Categoria_m->add($nombre);
+  }
+
 }

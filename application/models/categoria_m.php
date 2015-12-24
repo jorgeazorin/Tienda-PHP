@@ -4,8 +4,8 @@ if (!defined('BASEPATH'))
  
 class Categoria_m extends CI_Model {
   
- function add() {
-  $nombre = $this->input->post('nombre');
+ function add($nombre) {
+  //$nombre = $this->input->post('nombre');
   $data = array(
    'nombre' => $nombre
   );
