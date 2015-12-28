@@ -28,8 +28,7 @@ class Categoria_m extends CI_Model {
   $this->db->delete('categoria', array('id' => $a));
   return;
  }
- function update($id) {
-  $nombre = $this->input->post('nombre');
+ function update($id,$nombre) {
 
   $data = array(
    'nombre' => $nombre

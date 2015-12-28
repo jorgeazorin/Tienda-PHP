@@ -42,8 +42,17 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
-$route['categorias'] = 'categoria/index'; //si pone categorias, va al index de categorias
-$route['categorias/crear'] = 'categoria/nuevo';
+
+
+
+
+$route['tiendas/(:num)/admin/categorias'] = "categoria/index/$1";
+$route['tiendas/(:num)/admin'] = "tienda/admin/$1";
+//administrar categorias de tiendas
+$route['tiendas/(:num)/admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
+$route['tiendas/(:num)/admin/categorias/(:num)/borrar'] = 'categoria/borrar/$2'; //BORRAR
+$route['tiendas/(:num)/admin/categorias/(:num)/editar'] = 'categoria/editar/$2'; //EDITAR
+
 
 
 /* End of file routes.php */
