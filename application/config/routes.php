@@ -42,5 +42,22 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
+
+
+
+$route['tiendas/(:num)/admin'] = "tienda/admin/$1"; //PAGINA DE ADMINISTRACION DE TIENDA
+
+$route['tiendas/(:num)/admin/categorias'] = "categoria/index/$1"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
+$route['tiendas/(:num)/admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
+$route['tiendas/(:num)/admin/categorias/(:num)/borrar'] = 'categoria/borrar/$2'; //BORRAR
+$route['tiendas/(:num)/admin/categorias/(:num)/editar'] = 'categoria/editar/$2'; //EDITAR
+
+//administrar subcategorias de una categoria de tienda
+$route['tiendas/(:num)/admin/categorias/(:num)'] = "subcategoria/index/$1/$2"; //PAGINA DE ADMINISTRACION DE SUBCATEGORIAS DE CAT DE TIENDA
+$route['tiendas/(:num)/admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$2"; //CREAR SUBCATEGORIA
+$route['tiendas/(:num)/admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$3"; //BORRAR SUBCATEGORIA
+$route['tiendas/(:num)/admin/categorias/(:num)/subcat/(:num)/editar'] = "subcategoria/editar/$3"; //EDITAR SUBCATEGORIA
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

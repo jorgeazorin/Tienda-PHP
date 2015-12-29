@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2015 a las 16:58:47
+-- Tiempo de generación: 29-12-2015 a las 12:22:54
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -42,6 +42,15 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(38, 'COSAS'),
+(39, 'JUGUETES'),
+(40, 'ESPECIAS');
 
 -- --------------------------------------------------------
 
@@ -188,7 +197,8 @@ CREATE TABLE `tiendacliente` (
 -- Indices de la tabla `caracteristicasprod`
 --
 ALTER TABLE `caracteristicasprod`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `caractprod` (`productoId`);
 
 --
 -- Indices de la tabla `categoria`
@@ -205,46 +215,70 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indices de la tabla `clienteproducto`
+--
+ALTER TABLE `clienteproducto`
+  ADD KEY `fkprodclienteid` (`clienteId`),
+  ADD KEY `fkcliproductoid` (`productoId`);
+
+--
 -- Indices de la tabla `direnvio`
 --
 ALTER TABLE `direnvio`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `enviocli` (`clienteId`);
 
 --
 -- Indices de la tabla `linpedido`
 --
 ALTER TABLE `linpedido`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `linpedped` (`pedidoId`),
+  ADD KEY `linpedprod` (`productoId`);
 
 --
 -- Indices de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mensajecli` (`clienteId`),
+  ADD KEY `mensajetienda` (`tiendaId`);
 
 --
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidoenvio` (`direnvioId`),
+  ADD KEY `pedidocli` (`clienteId`);
 
 --
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `prodsubcat` (`subcategoriaId`),
+  ADD KEY `prodtienda` (`tiendaId`);
 
 --
 -- Indices de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subcattienecat` (`categoriaId`);
 
 --
 -- Indices de la tabla `tienda`
 --
 ALTER TABLE `tienda`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tiendacliente`
+--
+ALTER TABLE `tiendacliente`
+  ADD KEY `fktiendaclienteid` (`clienteId`),
+  ADD KEY `fkclientetiendaid` (`tiendaId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -259,7 +293,7 @@ ALTER TABLE `caracteristicasprod`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
@@ -300,6 +334,71 @@ ALTER TABLE `subcategoria`
 --
 ALTER TABLE `tienda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `caracteristicasprod`
+--
+ALTER TABLE `caracteristicasprod`
+  ADD CONSTRAINT `caractprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`);
+
+--
+-- Filtros para la tabla `clienteproducto`
+--
+ALTER TABLE `clienteproducto`
+  ADD CONSTRAINT `fkcliproductoid` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`),
+  ADD CONSTRAINT `fkprodclienteid` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
+--
+-- Filtros para la tabla `direnvio`
+--
+ALTER TABLE `direnvio`
+  ADD CONSTRAINT `enviocli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
+--
+-- Filtros para la tabla `linpedido`
+--
+ALTER TABLE `linpedido`
+  ADD CONSTRAINT `linpedped` FOREIGN KEY (`pedidoId`) REFERENCES `pedido` (`id`),
+  ADD CONSTRAINT `linpedprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`);
+
+--
+-- Filtros para la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  ADD CONSTRAINT `mensajecli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `mensajetienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`);
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedidocli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `pedidoenvio` FOREIGN KEY (`direnvioId`) REFERENCES `direnvio` (`id`);
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `prodsubcat` FOREIGN KEY (`subcategoriaId`) REFERENCES `subcategoria` (`id`),
+  ADD CONSTRAINT `prodtienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`);
+
+--
+-- Filtros para la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `subcattienecat` FOREIGN KEY (`categoriaId`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tiendacliente`
+--
+ALTER TABLE `tiendacliente`
+  ADD CONSTRAINT `fkclientetiendaid` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`),
+  ADD CONSTRAINT `fktiendaclienteid` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
