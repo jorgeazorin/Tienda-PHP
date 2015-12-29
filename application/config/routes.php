@@ -45,13 +45,15 @@ $route['404_override'] = '';
 
 
 
+$route['tiendas/(:num)/admin'] = "tienda/admin/$1"; //PAGINA DE ADMINISTRACION DE TIENDA
 
-$route['tiendas/(:num)/admin/categorias'] = "categoria/index/$1";
-$route['tiendas/(:num)/admin'] = "tienda/admin/$1";
-//administrar categorias de tiendas
+$route['tiendas/(:num)/admin/categorias'] = "categoria/index/$1"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
 $route['tiendas/(:num)/admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
 $route['tiendas/(:num)/admin/categorias/(:num)/borrar'] = 'categoria/borrar/$2'; //BORRAR
 $route['tiendas/(:num)/admin/categorias/(:num)/editar'] = 'categoria/editar/$2'; //EDITAR
+
+//administrar subcategorias de una categoria de tienda
+$route['tiendas/(:num)/admin/categorias/(:num)'] = "subcategoria/index/$1/$2"; //PAGINA DE ADMINISTRACION DE SUBCATEGORIAS DE CAT DE TIENDA
 
 
 

@@ -1,25 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Categoria extends CI_Controller {
+class Subcategoria extends CI_Controller {
 
   function __construc(){
     parent::__construc();
     $this->load->database();
   }
 
-  public function index($idtienda)
+  public function index($idtienda,$idcat)
 	{
 
-    $this->load->model("Categoria_m",'', TRUE);
-    $data['titulo']="Listado de categorías";
+    //$this->load->model("Subcategoria_m",'', TRUE);
+    $data['titulo']="Listado de subcategorías";
     $data['idtienda']=$idtienda;
-    //$data['cuantos']=$this->Agenda_m->count_all();
-    $data['lista']=$this->Categoria_m->getCategorias();
+    $data['idcat']=$idcat;
 
-		$this->load->view('categorias/index', $data);
+   // $data['lista']=$this->Categoria_m->getCategorias();
+		$this->load->view('subcategorias/index', $data);
 
 	}
 
+/*
   public function nuevo()
   {
     $this->load->model("Categoria_m",'', TRUE);
@@ -39,5 +40,6 @@ class Categoria extends CI_Controller {
     $nombre = $_POST['nuevonombre'];
     $this->Categoria_m->actualizar($idcat,$nombre);
   }
+  */
 
 }
