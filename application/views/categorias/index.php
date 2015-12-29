@@ -12,7 +12,7 @@
 	  	if (!is_null($lista)) {
 		    foreach ($lista as $categoria) {
 		      ?> <div class="row">
-		      		<div class="col-sm-4"><?php echo $categoria->nombre; ?></div>
+		      		<div class="col-sm-4"><h4><?php echo $categoria->nombre; ?></h4></div>
 		      		<div class="col-sm-4">
 		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit">
 		      				<div>
@@ -25,9 +25,11 @@
 		      		</div>
 		      		<div class="col-sm-4">
 		      			<div class="btn-group" role="group" aria-label="Botones de acción">
-		      			<button class="btn btn-warning btn-editar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
+		      			<a href='/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $categoria->id; ?>'title="Administrar subcategorías" class="btn btn-info btn-subcat"><span class="glyphicon glyphicon-eye-open"></span>
+		      			</a>
+		      			<button title="Editar categoría" class="btn btn-warning btn-editar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
 		      			</button>
-		      			<button class="btn btn-danger btn-borrar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-trash"></span>
+		      			<button title="Borrar categoría" class="btn btn-danger btn-borrar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-trash"></span>
 		      			</button>
 		      			</div>
 		      		</div>
@@ -74,6 +76,7 @@ $(document).ready(function () {
 			 //$('#form')[0].checkValidity()
 		}
 	};
+
 
 	//borrar una categoria
 	$(".btn-borrar").click(function(){

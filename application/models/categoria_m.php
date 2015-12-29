@@ -4,14 +4,14 @@ if (!defined('BASEPATH'))
  
 class Categoria_m extends CI_Model {
   
- function add($nombre) {
+ function crear($nombre) {
   //$nombre = $this->input->post('nombre');
   $data = array(
    'nombre' => $nombre
   );
   $this->db->insert('categoria', $data);
  }
- function view() {
+ function getCategorias() {
   $ambil = $this->db->get('categoria');
   if ($ambil->num_rows() > 0) {
    foreach ($ambil->result() as $data) {
@@ -20,15 +20,15 @@ class Categoria_m extends CI_Model {
    return $hasil;
   }
  }
- function edit($a) {
+ function getCategoria($a) {
   $d = $this->db->get_where('categoria', array('id' => $a))->row();
   return $d;
  }
- function delete($a) {
+ function borrar($a) {
   $this->db->delete('categoria', array('id' => $a));
   return;
  }
- function update($id,$nombre) {
+ function actualizar($id,$nombre) {
 
   $data = array(
    'nombre' => $nombre
