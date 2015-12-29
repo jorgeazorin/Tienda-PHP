@@ -10,24 +10,24 @@ class Subcategoria extends CI_Controller {
   public function index($idtienda,$idcat)
 	{
 
-    //$this->load->model("Subcategoria_m",'', TRUE);
+    $this->load->model("Subcategoria_m",'', TRUE);
     $data['titulo']="Listado de subcategorías";
     $data['idtienda']=$idtienda;
     $data['idcat']=$idcat;
 
-   // $data['lista']=$this->Categoria_m->getCategorias();
+    $data['lista']=$this->Subcategoria_m->getSubcategorias($idcat);
 		$this->load->view('subcategorias/index', $data);
 
 	}
 
-/*
-  public function nuevo()
-  {
-    $this->load->model("Categoria_m",'', TRUE);
-    $nombre = $_POST['nuevacat'];
-    $this->Categoria_m->crear($nombre);
-  }
 
+  public function nuevo($idcat)
+  {
+    $this->load->model("Subcategoria_m",'', TRUE);
+    $nombre = $_POST['nombre'];
+    $this->Subcategoria_m->crear($nombre,$idcat);
+  }
+/*
   public function borrar($idcat)
   {
     $this->load->model("Categoria_m",'', TRUE);
