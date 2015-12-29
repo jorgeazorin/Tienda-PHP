@@ -55,7 +55,7 @@ $route['tiendas/(:num)/admin/categorias/(:num)/editar'] = 'categoria/editar/$2';
 //administrar subcategorias de una categoria de tienda
 $route['tiendas/(:num)/admin/categorias/(:num)'] = "subcategoria/index/$1/$2"; //PAGINA DE ADMINISTRACION DE SUBCATEGORIAS DE CAT DE TIENDA
 $route['tiendas/(:num)/admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$2"; //CREAR SUBCATEGORIA
-
+$route['tiendas/(:num)/admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$3";
 
 
 /* End of file routes.php */

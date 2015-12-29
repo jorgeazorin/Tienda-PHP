@@ -23,4 +23,9 @@ class Subcategoria_m extends CI_Model {
     $this->db->insert('subcategoria', $data);
   }
 
+  function borrar($idsubcat) {
+  $this->db->delete('subcategoria', array('id' => $idsubcat));
+  return;
+ }
+
 }
