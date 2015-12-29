@@ -10,6 +10,11 @@ class Tienda extends CI_Controller {
 
   public function admin() {
     $data['titulo']="Panel de control de Aliexpress ";
+
+    $this->load->model("Tienda_m",'', TRUE);
+    $data['lista_tiendas']=$this->Tienda_m->getTiendas();
+
+
     $this->load->view('portal-bo/index', $data);
   }
 /*
