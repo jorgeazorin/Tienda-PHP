@@ -28,4 +28,12 @@ class Subcategoria_m extends CI_Model {
   return;
  }
 
+ function actualizar($id,$nombre) {
+  $data = array(
+   'nombre' => $nombre
+  );
+  $this->db->where('id', $id);
+  $this->db->update('subcategoria', $data);
+ }
+
 }
