@@ -27,13 +27,13 @@ class Subcategoria extends CI_Controller {
     $nombre = $_POST['nombre'];
     $this->Subcategoria_m->crear($nombre,$idcat);
   }
-/*
-  public function borrar($idcat)
-  {
-    $this->load->model("Categoria_m",'', TRUE);
-    $this->Categoria_m->borrar($idcat);
-  }
 
+  public function borrar($idsubcat)
+  {
+    $this->load->model("Subcategoria_m",'', TRUE);
+    $this->Subcategoria_m->borrar($idsubcat);
+  }
+/*
   public function editar($idcat)
   {
     $this->load->model("Categoria_m",'', TRUE);

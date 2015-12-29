@@ -13,7 +13,15 @@
 	  	if (!is_null($lista)) {
 		    foreach ($lista as $subcategoria) {
 		      ?> <div class="row">
-		      		<div class="col-sm-4"><h4><?php echo $subcategoria->nombre; ?></h4></div>
+		      		<div class="col-sm-4">
+		      			<h4><?php echo $subcategoria->nombre; ?></h4>
+		      		</div>
+		      		<div class="col-sm-4">
+		      			<div class="btn-group" role="group" aria-label="Botones de acción">
+		      			<button title="Borrar subcategoría" class="btn btn-danger btn-borrar" data-id="<?php echo $subcategoria->id; ?>"><span class="glyphicon glyphicon-trash"></span>
+		      			</button>
+		      			</div>
+		      		</div>
 		      	</div>
 		        <?php
 		    }
@@ -38,7 +46,7 @@
 
 <script>
 $(document).ready(function () {
-	//borrar una categoria
+	//crear subcategoria
 	$("#btn-crear").click(function(){
 		var data = $("#nuevasubcat").val();
 		if(data)
@@ -50,17 +58,22 @@ $(document).ready(function () {
 	        success:function() {
 	        	location.reload();
 	        }
-		});
+			});
 		}
-		/*
+	});
+
+	//borrar una subcategoria
+	$(".btn-borrar").click(function(){
+		var data = $(this).attr('data-id');
   		$.ajax({
-	        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/' + data + '/borrar',
+	        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $idcat; ?>/subcat/' + data + '/borrar',
 	        type : 'delete',
 	        success:function (data) {
 	        	location.reload();
 	        }
 		});
-		*/
 	});
+
+
 });
 </script>

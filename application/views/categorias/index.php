@@ -14,7 +14,7 @@
 		      ?> <div class="row">
 		      		<div class="col-sm-4"><h4><?php echo $categoria->nombre; ?></h4></div>
 		      		<div class="col-sm-4">
-		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit">
+		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit" style="display:none">
 		      				<div>
 		      					<input type="text" id="input<?php echo $categoria->id; ?>" value="<?php echo $categoria->nombre; ?>" placeholder="Nuevo nombre de categoría..." class="form-control">
 		      				</div>
@@ -56,8 +56,8 @@
 
 
 <script>
+
 $(document).ready(function () {
-	$(".text-edit").hide();
 	function crear(e) {
 		e.preventDefault();
 		var nombre = $('#nuevacat').val();
