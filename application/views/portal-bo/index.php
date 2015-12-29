@@ -12,55 +12,44 @@
   <h3>Lista de tiendas</h3>
 
 
-<?php
-	  	if (!is_null($lista_tiendas)) {
-		    foreach ($lista_tiendas as $tienda) {
-		      ?> <div class="row">
-
-		      	</div>
-		        <?php
-		    }
-		}
-	  ?>
-
-
-<?php
-if(!is_null($lista_tiendas)) {
-?>
-<table class="table table-striped"> 
-	<caption>Lista de tiendas.</caption> 
-	<thead> 
-		<tr> 
-			<th>ID</th> 
-			<th>Localización</th>
-			<th>Fecha apertura</th> 
-			<th>Info contacto</th> 
-		</tr> 
-	</thead>
-	<tbody>
-		<?php 
-		foreach ($lista_tiendas as $tienda) {
-		?>
+	<?php
+	if(!is_null($lista_tiendas)) {
+	?>
+	<table class="table table-striped"> 
+		<thead> 
 			<tr> 
-				<th scope="row"><?php echo $tienda->id; ?></th> 
-				<td><?php echo $tienda->localizacion; ?></td> 
-				<td><?php echo $tienda->fechaapertura; ?></td> 
-				<td><?php echo $tienda->infocontacto; ?></td> 
+				<th>ID</th> 
+				<th>Localización</th>
+				<th>Fecha apertura</th> 
+				<th>Info contacto</th>
+				<th>Acciones</th> 
 			</tr> 
-		<?php
-		}
-		?> 
-	</tbody> 
-</table>
+		</thead>
+		<tbody>
+			<?php 
+			foreach ($lista_tiendas as $tienda) {
+			?>
+				<tr> 
+					<th scope="row"><?php echo $tienda->id; ?></th> 
+					<td><?php echo $tienda->localizacion; ?></td> 
+					<td><?php echo $tienda->fechaapertura; ?></td> 
+					<td><?php echo $tienda->infocontacto; ?></td>
+					<td><a href='#' class="btn btn-info">Ver productos</a></td>
+				</tr> 
+			<?php
+			}
+			?> 
+		</tbody> 
+	</table>
 
-<?php
-}
-else
-{
-	?><p>Parece que no tienes ninguna tienda registrada...</p>
-<?php
-}
-?>
+	<?php
+	}
+	else
+	{
+		?><p>Parece que no tienes ninguna tienda registrada...</p>
+	<?php
+	}
+	?>
 
 
 </main>
