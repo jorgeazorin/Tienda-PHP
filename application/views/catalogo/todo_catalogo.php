@@ -59,6 +59,7 @@
     }
     del {
         text-decoration: line-through;
+        display: table-row;
     }
     main{
         background-color: #eee;
