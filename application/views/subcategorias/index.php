@@ -5,8 +5,6 @@
 
 <main>
 	<h1><?php echo $titulo; ?></h1>
-	<h1>Tienda <?php echo $idtienda; ?></h1>
-	<h1>Categoria <?php echo $idcat; ?></h1>
 
 	<div class="container">
 	  <?php
@@ -66,7 +64,7 @@ $(document).ready(function () {
 		if(data)
 		{
 			$.ajax({
-	        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $idcat; ?>/crearsubcat',
+	        url : '<?php echo $idcat; ?>/crearsubcat',
 	        type : 'POST',
 	        data: {nombre:data},
 	        success:function() {
@@ -93,7 +91,7 @@ $(document).ready(function () {
 		if(nombre!=undefined && nombre!="")
 		{
 			$.ajax({
-		        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $idcat; ?>/subcat/' + id + '/editar',
+		        url : '<?php echo $idcat; ?>/subcat/' + id + '/editar',
 		        type : 'POST',
 		        data : {nuevonombre:nombre},
 		        success:function (data) {
@@ -109,7 +107,7 @@ $(document).ready(function () {
 	$(".btn-borrar").click(function(){
 		var data = $(this).attr('data-id');
   		$.ajax({
-	        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $idcat; ?>/subcat/' + data + '/borrar',
+	        url : '<?php echo $idcat; ?>/subcat/' + data + '/borrar',
 	        type : 'delete',
 	        success:function (data) {
 	        	location.reload();

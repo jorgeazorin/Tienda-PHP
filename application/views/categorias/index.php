@@ -25,7 +25,7 @@
 		      		</div>
 		      		<div class="col-sm-4">
 		      			<div class="btn-group" role="group" aria-label="Botones de acción">
-		      			<a href='/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/<?php echo $categoria->id; ?>'title="Administrar subcategorías" class="btn btn-info btn-subcat"><span class="glyphicon glyphicon-eye-open"></span>
+		      			<a href='categorias/<?php echo $categoria->id; ?>'title="Administrar subcategorías" class="btn btn-info btn-subcat"><span class="glyphicon glyphicon-eye-open"></span>
 		      			</a>
 		      			<button title="Editar categoría" class="btn btn-warning btn-editar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
 		      			</button>
@@ -41,14 +41,12 @@
 
 		<div class="row">
 		  	<div class="col-sm-4">
-		  		<form data-toggle="validator" id="form" role="form"  method="post" accept-charset="utf-8" action="categorias/crear">
 			    <div class="input-group">
 			      <input type="text" class="form-control" name="nuevacat" id="nuevacat" placeholder="Introduce nueva categoría..." required>
 			      <span class="input-group-btn">
-			        <button class="btn btn-primary" id="btn-crear" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+			        <button class="btn btn-primary" id="btn-crear"><span class="glyphicon glyphicon-plus"></span></button>
 			      </span>
 			    </div><!-- /input-group -->
-				</form>
 		  	</div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
 	</div><!--container-->
@@ -58,14 +56,14 @@
 <script>
 
 $(document).ready(function () {
-	function crear(e) {
-		e.preventDefault();
+	$("#btn-crear").click(function () {
+		console.log("CLICK");
 		var nombre = $('#nuevacat').val();
-		if(nombre) {
+		if(nombre) {	
 			 $.ajax({
-		        url : $('#form').attr("action"),
-		        type : $('#form').attr("method"),
-		        data : $('#form').serialize(),
+		        url : 'categorias/crear',
+		        type : 'POST',
+		        data : {nuevacat:nombre},
 		        success:function (data) {
 		        	location.reload();
 		        }
@@ -75,14 +73,14 @@ $(document).ready(function () {
 			 //$('#form').find(':submit').click()
 			 //$('#form')[0].checkValidity()
 		}
-	};
+	});
 
 
 	//borrar una categoria
 	$(".btn-borrar").click(function(){
 		var data = $(this).attr('data-id');
   		$.ajax({
-	        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/' + data + '/borrar',
+	        url : 'categorias/' + data + '/borrar',
 	        type : 'delete',
 	        success:function (data) {
 	        	location.reload();
@@ -108,7 +106,7 @@ $(document).ready(function () {
 		if(nombre!=undefined && nombre!="")
 		{
 			$.ajax({
-		        url : '/iw/tiendas/<?php echo $idtienda; ?>/admin/categorias/' + id + '/editar',
+		        url : 'categorias/' + id + '/editar',
 		        type : 'POST',
 		        data : {nuevonombre:nombre},
 		        success:function (data) {
@@ -119,7 +117,5 @@ $(document).ready(function () {
 
 
 	});
-
-	document.getElementById("btn-crear").addEventListener("click",crear);
 });
 </script>

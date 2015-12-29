@@ -8,10 +8,9 @@ class Tienda extends CI_Controller {
   }
 
 
-  public function admin($id) {
-    $data['titulo']="Panel de control de la tienda " . $id;
-    $data['id'] = $id;
-    $this->load->view('tienda-bo/index', $data);
+  public function admin() {
+    $data['titulo']="Panel de control de Aliexpress ";
+    $this->load->view('portal-bo/index', $data);
   }
 /*
   public function index()

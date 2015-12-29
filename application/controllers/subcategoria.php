@@ -7,12 +7,11 @@ class Subcategoria extends CI_Controller {
     $this->load->database();
   }
 
-  public function index($idtienda,$idcat)
+  public function index($idcat)
 	{
 
     $this->load->model("Subcategoria_m",'', TRUE);
-    $data['titulo']="Listado de subcategorías";
-    $data['idtienda']=$idtienda;
+    $data['titulo']="Subcategorías de la categoría " . $idcat;
     $data['idcat']=$idcat;
 
     $data['lista']=$this->Subcategoria_m->getSubcategorias($idcat);
