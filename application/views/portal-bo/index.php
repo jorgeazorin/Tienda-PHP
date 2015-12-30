@@ -16,7 +16,7 @@
 	if(!is_null($lista_tiendas)) {
 	?>
 	<table class="table table-hover"> 
-		<thead> 
+		<thead style="background-color:grey"> 
 			<tr> 
 				<th>ID</th> 
 				<th>Nombre <font color="red">(debe ser único)</font></th>
@@ -93,7 +93,7 @@
 	{
 		?><p>Parece que no tienes ninguna tienda registrada...</p>
 		<table class="table table-hover"> 
-		<thead> 
+		<thead style="background-color:grey"> 
 			<tr> 
 				<th>ID</th> 
 				<th>Nombre <font color="red">(debe ser único)</font></th>
