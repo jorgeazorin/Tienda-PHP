@@ -17,18 +17,19 @@ class Tienda extends CI_Controller {
 
     $this->load->view('portal-bo/index', $data);
   }
+
+
+  public function editar() {
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $localizacion = $_POST['localizacion'];
+    $fechaapertura = $_POST['fechaapertura'];
+    $infocontacto = $_POST['infocontacto'];
+    $this->load->model("Tienda_m",'', TRUE);
+    $this->Tienda_m->actualizar($id,$nombre,$localizacion,$fechaapertura,$infocontacto);
+  }
+
 /*
-  public function index()
-	{
-
-    $this->load->model("Categoria_m",'', TRUE);
-    $data['titulo']="Listado de categorías";
-    //$data['cuantos']=$this->Agenda_m->count_all();
-    $data['lista']=$this->Categoria_m->view();
-
-		$this->load->view('categorias/index', $data);
-
-	}
 
   public function nuevo()
   {

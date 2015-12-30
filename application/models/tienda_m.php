@@ -14,4 +14,15 @@ class Tienda_m extends CI_Model {
   }
  }
 
+  function actualizar($id,$nombre,$localizacion,$fechaapertura,$infocontacto) {
+  $data = array(
+   'nombre' => $nombre,
+   'localizacion' => $localizacion,
+   'fechaapertura' => $fechaapertura,
+   'infocontacto' => $infocontacto
+  );
+  $this->db->where('id', $id);
+  $this->db->update('tienda', $data);
+ }
+
 }

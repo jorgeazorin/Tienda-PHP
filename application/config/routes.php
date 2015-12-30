@@ -47,6 +47,7 @@ $route['404_override'] = '';
 
 
 $route['admin'] = "tienda/admin"; //pagina de dministracion de tienda
+$route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
 
 $route['admin/categorias'] = "categoria/index"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
 $route['admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
@@ -58,6 +59,8 @@ $route['admin/categorias/(:num)'] = "subcategoria/index/$1"; //PAGINA DE ADMINIS
 $route['admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$1"; //CREAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$2"; //BORRAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/editar'] = "subcategoria/editar/$2"; //EDITAR SUBCATEGORIA
+
+
 
 
 /*
