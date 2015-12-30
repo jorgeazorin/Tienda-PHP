@@ -53,7 +53,7 @@
 					<td>
 						<div class="btn-group">
 							<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
-							<a href='#' title="Ver sus productos" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
+							<a href='admin/tiendas/<?php echo $tienda->id; ?>' title="Ver sus productos" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
 							<a href='#' title="Editar tienda" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
 							<a href='#' title="Borrar tienda" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
 						</div>
@@ -92,6 +92,37 @@
 	else
 	{
 		?><p>Parece que no tienes ninguna tienda registrada...</p>
+		<table class="table table-hover"> 
+		<thead> 
+			<tr> 
+				<th>ID</th> 
+				<th>Nombre <font color="red">(debe ser único)</font></th>
+				<th>Localización</th>
+				<th>Fecha apertura</th> 
+				<th>Info contacto</th>
+				<th>Acciones</th> 
+			</tr> 
+		</thead>
+		<tr> 
+					<th scope="row">
+						
+					</th> 
+					<td>
+						<input placeholder="Nombre..." class="form-control" type="text" />
+					</td>  
+					<td>
+						<input placeholder="Localización..." class="form-control" type="text" />
+					</td>
+					<td>
+						<input placeholder="Fecha de apertura..." class="form-control" type="text"  />
+					</td> 
+					<td>
+						<input placeholder="Info de contacto..." class="form-control" type="text" />
+					</td>
+					<td>
+						<a id="btn-crear" href='#' title="Crear tienda" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span></a>
+					</td>
+				</tr> 
 	<?php
 	}
 	?>

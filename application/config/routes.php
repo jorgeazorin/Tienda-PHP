@@ -51,6 +51,12 @@ $route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
 $route['admin/tiendas/crear'] = 'tienda/nuevo';
 $route['admin/tiendas/(:num)/borrar'] = 'tienda/borrar/$1';
 
+$route['admin/tiendas/(:num)'] = 'producto/index/$1';
+
+
+
+
+
 $route['admin/categorias'] = "categoria/index"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
 $route['admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
 $route['admin/categorias/(:num)/borrar'] = 'categoria/borrar/$1'; //BORRAR

@@ -15,7 +15,7 @@ class Subcategoria extends CI_Controller {
     $data['idcat']=$idcat;
 
     $data['lista']=$this->Subcategoria_m->getSubcategorias($idcat);
-		$this->load->view('subcategorias/index', $data);
+		$this->load->view('portal-bo/subcategorias/index', $data);
 
 	}
 
