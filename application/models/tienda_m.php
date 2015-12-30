@@ -35,4 +35,9 @@ class Tienda_m extends CI_Model {
   $this->db->update('tienda', $data);
  }
 
+ function borrar($a) {
+  $this->db->delete('tienda', array('id' => $a));
+  return;
+ }
+
 }

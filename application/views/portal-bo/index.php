@@ -19,7 +19,7 @@
 		<thead> 
 			<tr> 
 				<th>ID</th> 
-				<th>Nombre</th>
+				<th>Nombre <font color="red">(debe ser único)</font></th>
 				<th>Localización</th>
 				<th>Fecha apertura</th> 
 				<th>Info contacto</th>
@@ -55,6 +55,7 @@
 							<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
 							<a href='#' title="Ver sus productos" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
 							<a href='#' title="Editar tienda" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href='#' title="Borrar tienda" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
 						</div>
 					</td>
 				</tr> 
@@ -194,6 +195,17 @@ $(document).ready(function() {
 	        }
 		});
 
+	 });
+
+	 $('.btn-borrar').click(function () {
+	 	var id = $(this).parent().parent().parent().find('.idtienda')[0].innerHTML;
+	 	$.ajax({
+	        url : 'admin/tiendas/' + id + '/borrar',
+	        type : 'delete',
+	        success:function (data) {
+	        	location.reload();
+	        }
+		});
 	 });
 
 

@@ -40,13 +40,8 @@ public function nuevo()
     $this->Tienda_m->actualizar($id,$nombre,$localizacion,$fechaapertura,$infocontacto);
   }
 
-/*
-
-  public function nuevo()
-  {
-    $this->load->model("Categoria_m",'', TRUE);
-    $nombre = $_POST['nuevacat'];
-    $this->Categoria_m->add($nombre);
+  public function borrar($id) {
+    $this->load->model("Tienda_m",'', TRUE);
+    $this->Tienda_m->borrar($id);
   }
-*/
 }

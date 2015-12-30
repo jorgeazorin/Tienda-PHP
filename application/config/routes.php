@@ -49,6 +49,7 @@ $route['404_override'] = '';
 $route['admin'] = "tienda/admin"; //pagina de dministracion de tienda
 $route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
 $route['admin/tiendas/crear'] = 'tienda/nuevo';
+$route['admin/tiendas/(:num)/borrar'] = 'tienda/borrar/$1';
 
 $route['admin/categorias'] = "categoria/index"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
 $route['admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
