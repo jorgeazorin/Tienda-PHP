@@ -19,6 +19,17 @@ class Tienda extends CI_Controller {
   }
 
 
+public function nuevo()
+{
+    $this->load->model("Tienda_m",'', TRUE);
+    $nombre = $_POST['nombre'];
+    $localizacion = $_POST['localizacion'];
+    $fechaapertura = $_POST['fechaapertura'];
+    $infocontacto = $_POST['infocontacto'];
+
+     $this->Tienda_m->crear($nombre,$localizacion,$fechaapertura,$infocontacto);
+}
+
   public function editar() {
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];

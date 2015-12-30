@@ -52,18 +52,39 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<a href='#' style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
-							<a href='#' class="btn btn-info">Ver productos</a>
-							<a href='#' class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
+							<a href='#' title="Ver sus productos" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
+							<a href='#' title="Editar tienda" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
 						</div>
 					</td>
 				</tr> 
 			<?php
 			}
 			?>
-
+			<tr> 
+					<th scope="row">
+						
+					</th> 
+					<td>
+						<input placeholder="Nombre..." class="form-control" type="text" />
+					</td>  
+					<td>
+						<input placeholder="Localización..." class="form-control" type="text" />
+					</td>
+					<td>
+						<input placeholder="Fecha de apertura..." class="form-control" type="text"  />
+					</td> 
+					<td>
+						<input placeholder="Info de contacto..." class="form-control" type="text" />
+					</td>
+					<td>
+						<a id="btn-crear" href='#' title="Crear tienda" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span></a>
+					</td>
+				</tr> 
 		</tbody> 
 	</table>
+
+
 
 	<?php
 	}
@@ -137,14 +158,43 @@ $(document).ready(function() {
 	    }
 	    //console.log(datos);
 	    $.ajax({
-		        url : 'admin/tiendas/' + id + '/editar',
-		        type : 'POST',
-		        data : datos,
-		        success:function (data) {
-		        	location.reload();
-		        }
-		    });
+	        url : 'admin/tiendas/' + id + '/editar',
+	        type : 'POST',
+	        data : datos,
+	        success:function (data) {
+	        	location.reload();
+	        }
+		});
 	});
+
+	 $('#btn-crear').click(function () {
+	 	var dad = $(this).parent().parent();
+	 	var inputs = dad.find('input[type="text"]');
+	 	//comprobamos que los campos esten rellenos
+	 	var datos = {}
+        for(var i=0;i<inputs.length;i++) {
+        	var input = inputs[i].value;
+	    	if(!input)
+	    		return;
+	    	if(i==0)
+	    		datos.nombre = input;
+	    	if(i==1)
+	    		datos.localizacion = input;
+	    	if(i==2)
+	    		datos.fechaapertura = input;
+	    	if(i==3)
+	    		datos.infocontacto = input;
+        }
+        $.ajax({
+	        url : 'admin/tiendas/crear',
+	        type : 'post',
+	        data : datos,
+	        success:function (data) {
+	        	location.reload();
+	        }
+		});
+
+	 });
 
 
 });
