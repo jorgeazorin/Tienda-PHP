@@ -65,15 +65,15 @@ class Producto extends CI_Controller {
 		$this->load->view('portal-bo/productos/index', $data);
 
 	}
-
-/*
-  public function nuevo()
+public function nuevo($idtienda)
   {
-    $this->load->model("Categoria_m",'', TRUE);
-    $nombre = $_POST['nuevacat'];
-    $this->Categoria_m->crear($nombre);
+    $this->load->model("Producto_m",'', TRUE);
+    $datos = $_POST['datos'];
+
+    $this->Producto_m->crear($datos,$idtienda);
   }
 
+/*
   public function borrar($idcat)
   {
     $this->load->model("Categoria_m",'', TRUE);

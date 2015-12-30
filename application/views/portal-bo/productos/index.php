@@ -23,41 +23,8 @@
 				foreach ($categoria->subcategorias as $subcategoria)
 				{
 					echo "<h4>Subcategoría " . $subcategoria->nombre . " ---- " . count($subcategoria->productos) . " productos</h4>";
-					if(count($subcategoria->productos)==0)
-					{
-						?>
 
-
-
-						<table class="table table-hover"> 
-							<tr> 
-								<th scope="row">
-									
-								</th> 
-								<td>
-									<input placeholder="Nombre..." class="form-control" type="text" />
-								</td>  
-								<td>
-									<input placeholder="Especificaciones..." class="form-control" type="text" />
-								</td>
-								<td>
-									<input placeholder="Descripción..." class="form-control" type="text"  />
-								</td> 
-								<td>
-									<input placeholder="Precio..." class="form-control" type="text" />
-								</td>
-								<td>
-									<a href='#' title="Crear producto" class="btn btn-primary btn-success btn-crear"><span class="glyphicon glyphicon-plus"></span></a>
-								</td>
-							</tr> 
-						</table>
-
-
-
-
-					<?php	
-					}
-					else //no esta vacio, a crear la tabla
+					if(count($subcategoria->productos)>0) //si tiene productos...
 					{
 						?>
 							<table class="table table-hover"> 
@@ -106,34 +73,10 @@
 										<a href='#' title="Borrar producto" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
 									</div>
 								</td>
-							</tr> 
+							</tr>
 						<?php
 						}
-						?>
-							<tr> 
-								<th scope="row">
-									
-								</th> 
-								<td>
-									<input placeholder="Nombre..." class="form-control" type="text" />
-								</td>  
-								<td>
-									<input placeholder="Especificaciones..." class="form-control" type="text" />
-								</td>
-								<td>
-									<input placeholder="Descripción..." class="form-control" type="text"  />
-								</td> 
-								<td>
-									<input placeholder="Precio..." class="form-control" type="text" />
-								</td>
-								<td>
-									<a href='#' title="Crear producto" class="btn btn-primary btn-success btn-crear"><span class="glyphicon glyphicon-plus"></span></a>
-								</td>
-							</tr> 
-							</tbody> 
-							</table>
-
-
+						?></tbody> </table>
 						<?php
 					}
 				}
@@ -141,6 +84,74 @@
 		}
 	}
 	?>
+			<h2>Añadir nuevo producto para la tienda</h2>
+			<div class="container form-crear-prod"> 
+						<p>
+							Nombre:
+							<input placeholder="Nombre..." class="form-control" type="text" />
+						</p>
+						<p>
+							Especificaciones:
+							<input placeholder="Especificaciones..." class="form-control" type="text" />
+						</p>
+						<p>
+							Descripción;
+							<input placeholder="Descripción..." class="form-control" type="text"  />
+						</p>
+						<p>
+							Precio:
+							<input placeholder="Precio..." class="form-control" type="text" />
+						</p>
+
+						<p>
+							Categoría:
+							<select id="nuevocat">
+								<?php
+								if(!is_null($lista_subcategorias)) 
+								{ //si no es nula
+									echo "<option value='-1'>Selecciona una categoría...</option>";
+									foreach ($lista_subcategorias as $categoria) 
+									{
+										echo "<option value=" . $categoria->id . ">" . $categoria->nombre . "</option>";
+									}
+								}
+								else
+								{
+									echo "<option value=-1>No existe ninguna categoría...</option>";
+								}
+								?>
+							</select>
+
+							<span style="display:none">
+								Subcategoría:
+								<select id="nuevosubcat">
+									<?php
+									echo "<option value='-1'>Selecciona una subcategoría...</option>";
+										foreach ($lista_subcategorias as $categoria)
+										{
+											foreach ($categoria->subcategorias as $subcategoria)
+											{
+												echo "<option style='display:none' value=" . $subcategoria->id . " data-catid=" . $subcategoria->categoriaId . ">" . $subcategoria->nombre . "</option>";
+											}
+										}
+									?>
+								</select>
+							</span>
+
+
+						</p>
+
+
+
+
+
+
+						<p>
+							<a href='#' title="Crear producto" class="btn btn-primary btn-success btn-crear">
+								<span class="glyphicon glyphicon-plus"></span>
+							</a>
+						</p>
+			</div> 
 
 
 
@@ -162,5 +173,68 @@
 
 <script>
 
+$('select#nuevocat').change(function() {
+      // var seleccionao = $("select option:selected").attr('value');
+      var catselecc = $(this).val();
+      if(catselecc!=-1) { //cargar las subcategorias
+      	//lo que habra que hacer es, que borre las subcategorias que no sean de esa cat
+
+      	//analiza cada opcion
+      	$("#nuevosubcat option").each(function()
+		{
+			$(this).hide();
+			var catid = $(this).attr("data-catid");
+			if(catid==catselecc || catid==undefined)
+				$(this).show();
+		});
+
+      	$("#nuevosubcat").parent().show();
+      }
+      else
+      {
+      	$("#nuevosubcat").parent().hide();
+      }
+
+
+});
+
+$(".btn-crear").click(function() {
+	var form = $(".form-crear-prod");
+	var inputs = form.find(":input");
+
+	var valores_post = [];
+	for(var i = 0; i< inputs.length;i++) {
+		var input = inputs[i];
+		if(input.nodeName=="INPUT") //input
+		{
+			if(input.value=="")
+			{
+				//console.log("ERROR INPUT VACIO");
+				return;
+			}
+
+		}
+		else if(input.nodeName=="SELECT") //select
+		{
+			if(input.value=="-1")
+			{
+				//console.log("ERROR SELECT VACIO");
+				return;
+			}
+		}
+
+		valores_post[i] = input.value;
+	}
+
+	console.log(valores_post);
+	$.ajax({
+	    url : '<?php echo $tiendaid; ?>/crearprod',
+	    type : 'POST',
+	    data : {datos:valores_post},
+	    success:function (data) {
+	    	location.reload();
+	    }
+	});
+});
 
 </script>
