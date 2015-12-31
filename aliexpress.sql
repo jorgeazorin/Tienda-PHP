@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2015 a las 19:07:33
+-- Tiempo de generación: 31-12-2015 a las 16:53:43
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caracteristicasprod` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `stock` int(11) NOT NULL,
   `productoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,8 +49,7 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(42, 'SELFIES'),
-(43, 'AAA');
+(43, 'Cosas serias');
 
 -- --------------------------------------------------------
 
@@ -169,8 +169,8 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `nombre`, `categoriaId`) VALUES
-(5, 'a', 43),
-(6, 'b', 43);
+(5, 'Juguetes', 43),
+(6, 'Cuchillos', 43);
 
 -- --------------------------------------------------------
 
@@ -185,6 +185,13 @@ CREATE TABLE `tienda` (
   `fechaapertura` date NOT NULL,
   `infocontacto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tienda`
+--
+
+INSERT INTO `tienda` (`id`, `nombre`, `localizacion`, `fechaapertura`, `infocontacto`) VALUES
+(16, 'Tienda Pepe', 'España, Madrid', '2014-11-11', 'tiendapepe@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -265,8 +272,8 @@ ALTER TABLE `pedido`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `prodsubcat` (`subcategoriaId`),
-  ADD KEY `prodtienda` (`tiendaId`);
+  ADD KEY `prodtienda` (`tiendaId`),
+  ADD KEY `prodsubcat` (`subcategoriaId`);
 
 --
 -- Indices de la tabla `subcategoria`
@@ -297,12 +304,12 @@ ALTER TABLE `tiendacliente`
 -- AUTO_INCREMENT de la tabla `caracteristicasprod`
 --
 ALTER TABLE `caracteristicasprod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
@@ -332,17 +339,17 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Restricciones para tablas volcadas
 --
@@ -351,7 +358,7 @@ ALTER TABLE `tienda`
 -- Filtros para la tabla `caracteristicasprod`
 --
 ALTER TABLE `caracteristicasprod`
-  ADD CONSTRAINT `caractprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`);
+  ADD CONSTRAINT `caractprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `clienteproducto`
@@ -391,8 +398,8 @@ ALTER TABLE `pedido`
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `prodsubcat` FOREIGN KEY (`subcategoriaId`) REFERENCES `subcategoria` (`id`),
-  ADD CONSTRAINT `prodtienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`);
+  ADD CONSTRAINT `prodsubcat` FOREIGN KEY (`subcategoriaId`) REFERENCES `subcategoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prodtienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `subcategoria`
