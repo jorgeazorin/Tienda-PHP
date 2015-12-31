@@ -33,13 +33,13 @@ class Caracteristica extends CI_Controller {
     $this->load->model("Caracteristica_m",'', TRUE);
     $this->Caracteristica_m->borrar($idcaracteristica);
   }
-/*
-  public function editar($idsubcat)
+
+  public function editar($idcaracteristica,$nombre,$stock)
   {
-    $this->load->model("Subcategoria_m",'', TRUE);
-    $nombre = $_POST['nuevonombre'];
-    $this->Subcategoria_m->actualizar($idsubcat,$nombre);
+    $this->load->model("Caracteristica_m",'', TRUE);
+    $nombre = $_POST['nombre'];
+    $stock = $_POST['stock'];
+    $this->Caracteristica_m->actualizar($idcaracteristica,$nombre,$stock);
   }
-  */
 
 }

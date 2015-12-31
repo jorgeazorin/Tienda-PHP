@@ -28,14 +28,14 @@ class Caracteristica_m extends CI_Model {
   $this->db->delete('caracteristicasprod', array('id' => $idcaracteristica));
   return;
  }
- /*
 
- function actualizar($id,$nombre) {
+ function actualizar($id,$nombre,$stock) {
   $data = array(
-   'nombre' => $nombre
+   'nombre' => $nombre,
+   'stock' => $stock
   );
   $this->db->where('id', $id);
-  $this->db->update('subcategoria', $data);
+  $this->db->update('caracteristicasprod', $data);
  }
-*/
+
 }

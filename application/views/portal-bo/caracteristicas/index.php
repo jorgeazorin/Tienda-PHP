@@ -104,7 +104,7 @@
 
 <script>
 $(document).ready(function () {
-	//crear subcategoria
+	//crear caracteristica
 	$("#btn-crear").click(function(){
 		var padre = $(this).parent().parent();
 		var inputs = padre.find(":input");
@@ -136,6 +136,71 @@ $(document).ready(function () {
 	 	$.ajax({
 	        url : '<?php echo $idprod; ?>/caracteristica/' + id + '/borrar',
 	        type : 'delete',
+	        success:function (data) {
+	        	location.reload();
+	        }
+		});
+	});
+
+
+
+	 $('.btn-editar').click(function () {
+    	var estado = $(this).attr("data-estado");
+    	var dad = $(this).parent().parent().parent();
+    	var labels = dad.find('label');
+    	var inputs = dad.find(':input');
+    	var btn = dad.find(".btn-guardar");
+
+    	if(estado=="mostrando") //pasamos a la vista de editar
+    	{
+    		$(this).attr("data-estado","editando"); //le cambiamos el flag
+
+    		//ocultamos los labels
+	        labels.hide();
+
+	        //rellenamos los inputs
+	        for(var i=0;i<labels.length;i++) {
+	        	inputs[i].value = labels[i].innerHTML;
+	        }
+
+	        //mostramos resultados
+	        inputs.show();
+	        btn.show();
+
+    	}
+    	else
+    	{
+    		//volvemos a la normalidad
+    		$(this).attr("data-estado","mostrando");
+    		inputs.hide();
+    		btn.hide();
+    		labels.show();
+    	}
+    });
+
+	$('.btn-guardar').click(function () {
+		var dad = $(this).parent().parent().parent();
+		var inputs = dad.find(':input');
+		var id = dad.find('.idcaracteristica')[0].innerHTML;
+
+		var datos = {}
+		datos.id = id;
+
+		for(var i=0;i<inputs.length;i++) 
+		{
+	    	var texto = inputs[i].value;
+	    	if(!texto) {
+	    		return; //si hay un campo sin rellenar, no es valido
+	    	}
+	    	if(i==0)
+	    		datos.nombre = texto;
+	    	if(i==1)
+	    		datos.stock = texto;
+	    }
+	    $.ajax({
+	        url : '<?php echo $idprod; ?>/caracteristica/' + id + '/editar',
+	        type : 'POST',
+	        data : datos,
 	        success:function (data) {
 	        	location.reload();
 	        }
