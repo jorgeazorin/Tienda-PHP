@@ -45,7 +45,13 @@ $route['404_override'] = '';
 
 
 
+$route['login'] = 'login/index';
+$route['login/validar'] = 'login/validar';
 
+
+
+
+//esto es, localhost/iw/admin
 $route['admin'] = "tienda/admin"; //pagina de administracion de tienda
 $route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
 $route['admin/tiendas/crear'] = 'tienda/nuevo';
