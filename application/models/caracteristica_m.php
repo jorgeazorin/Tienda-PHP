@@ -23,11 +23,12 @@ class Caracteristica_m extends CI_Model {
     );
     $this->db->insert('caracteristicasprod', $data);
   }
-/*
-  function borrar($idsubcat) {
-  $this->db->delete('subcategoria', array('id' => $idsubcat));
+
+  function borrar($idcaracteristica) {
+  $this->db->delete('caracteristicasprod', array('id' => $idcaracteristica));
   return;
  }
+ /*
 
  function actualizar($id,$nombre) {
   $data = array(

@@ -131,6 +131,17 @@ $(document).ready(function () {
 		}
 	});
 
+	$('.btn-borrar').click(function () {
+	 	var id = $(this).parent().parent().parent().find('.idcaracteristica')[0].innerHTML;
+	 	$.ajax({
+	        url : '<?php echo $idprod; ?>/caracteristica/' + id + '/borrar',
+	        type : 'delete',
+	        success:function (data) {
+	        	location.reload();
+	        }
+		});
+	});
+
 
 });
 </script>

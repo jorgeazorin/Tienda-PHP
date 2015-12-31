@@ -27,13 +27,13 @@ class Caracteristica extends CI_Controller {
     $stock = $_POST['stock'];
     $this->Caracteristica_m->crear($nombre,$stock,$idprod);
   }
-/*
-  public function borrar($idsubcat)
-  {
-    $this->load->model("Subcategoria_m",'', TRUE);
-    $this->Subcategoria_m->borrar($idsubcat);
-  }
 
+  public function borrar($idcaracteristica)
+  {
+    $this->load->model("Caracteristica_m",'', TRUE);
+    $this->Caracteristica_m->borrar($idcaracteristica);
+  }
+/*
   public function editar($idsubcat)
   {
     $this->load->model("Subcategoria_m",'', TRUE);
