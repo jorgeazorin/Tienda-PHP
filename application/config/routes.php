@@ -53,6 +53,8 @@ $route['admin/tiendas/(:num)/borrar'] = 'tienda/borrar/$1';
 
 $route['admin/tiendas/(:num)'] = 'producto/index/$1';
 $route['admin/tiendas/(:num)/crearprod'] = 'producto/nuevo/$1';
+$route['admin/tiendas/(:num)/borrarprod/(:num)'] = 'producto/borrar/$2';
+$route['admin/tiendas/(:num)/editarprod/(:num)'] = 'producto/editar/$2';
 
 
 

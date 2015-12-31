@@ -35,6 +35,7 @@
 										<th>Especificaciones</th>
 										<th>Descripción</th> 
 										<th>Precio</th>
+										<th>Subcategoría</th>
 										<th>Acciones</th> 
 									</tr> 
 								</thead>
@@ -67,6 +68,20 @@
 									<input placeholder="Precio..." class="form-control" type="text" style="display:none" />
 								</td>
 								<td>
+									<label><?php echo $subcategoria->nombre; ?></label>
+									<select style="display:none" class="form-control" id="subcatedit">
+									<?php
+										foreach ($lista_subcategorias as $categoriaselect)
+										{
+											foreach ($categoriaselect->subcategorias as $subcategoriaselect)
+											{
+												echo "<option value=" . $subcategoriaselect->id .  ">" . $subcategoriaselect->nombre . "</option>";
+											}
+										}
+									?>
+									</select>
+								</td>
+								<td>
 									<div class="btn-group">
 										<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
 										<a href='#' title="Editar producto" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
@@ -95,7 +110,7 @@
 							<input placeholder="Especificaciones..." class="form-control" type="text" />
 						</p>
 						<p>
-							Descripción;
+							Descripción:
 							<input placeholder="Descripción..." class="form-control" type="text"  />
 						</p>
 						<p>
@@ -105,7 +120,7 @@
 
 						<p>
 							Categoría:
-							<select id="nuevocat">
+							<select class="form-control" id="nuevocat">
 								<?php
 								if(!is_null($lista_subcategorias)) 
 								{ //si no es nula
@@ -124,7 +139,7 @@
 
 							<span style="display:none">
 								Subcategoría:
-								<select id="nuevosubcat">
+								<select class="form-control" id="nuevosubcat">
 									<?php
 									echo "<option value='-1'>Selecciona una subcategoría...</option>";
 										foreach ($lista_subcategorias as $categoria)
@@ -153,17 +168,6 @@
 						</p>
 			</div> 
 
-
-
-
-
-	<!--<pre>
-	<?php 
-		//print_r($lista_subcategorias);
-	?>
-	</pre>-->
-
-
 </main>
 
 
@@ -172,6 +176,97 @@
 
 
 <script>
+
+
+
+ $('.btn-editar').click(function () {
+	var estado = $(this).attr("data-estado");
+	var dad = $(this).parent().parent().parent();
+	var labels = dad.find('label');
+	var inputs = dad.find(':input');
+	var btn = dad.find(".btn-guardar");
+
+	if(estado=="mostrando") //pasamos a la vista de editar
+	{
+		$(this).attr("data-estado","editando"); //le cambiamos el flag
+
+		//ocultamos los labels
+        labels.hide();
+
+        //rellenamos los inputs
+        for(var i=0;i<labels.length;i++) {
+        	if(inputs[i].nodeName=="SELECT")
+        	{
+        		//selecciona por defecto la opcion que tenia en el label
+        		$("select#subcatedit option").each(function() 
+        		{
+        		 this.selected = (this.text == labels[i].innerHTML);
+        		});
+        	}
+        	else
+        		inputs[i].value = labels[i].innerHTML;
+        }
+
+        //mostramos resultados
+        inputs.show();
+        btn.show();
+
+	}
+	else
+	{
+		//volvemos a la normalidad
+		$(this).attr("data-estado","mostrando");
+		inputs.hide();
+		btn.hide();
+		labels.show();
+	}
+});
+
+
+
+$('.btn-guardar').click(function () {
+	var dad = $(this).parent().parent().parent();
+	var inputs = dad.find(':input');
+	var id = dad.find('.idprod')[0].innerHTML;
+
+	var datos = {}
+	datos.id = id;
+	for(var i=0;i<inputs.length;i++) 
+	{
+    	var texto = inputs[i].value;
+    	if(!texto) {
+    		return; //si hay un campo sin rellenar, no es valido
+    	}
+    	if(i==0)
+    		datos.nombre = texto;
+    	if(i==1)
+    		datos.especificaciones = texto;
+    	if(i==2)
+    		datos.descripcion = texto;
+    	if(i==3)
+    		datos.precio = texto;
+    	if(i==4) 
+    		datos.subcategoriaId = texto;
+    }
+    var tiendaid = "" + <?php echo $tiendaid; ?>;
+    datos.tiendaId = tiendaid;
+
+
+    console.log(datos);
+    
+    $.ajax({
+        url : '<?php echo $tiendaid; ?>/editarprod/' + id,
+        type : 'POST',
+        data : datos,
+        success:function (data) {
+        	location.reload();
+        }
+	});
+});
+
+
+
+
 
 $('select#nuevocat').change(function() {
       // var seleccionao = $("select option:selected").attr('value');
@@ -234,6 +329,20 @@ $(".btn-crear").click(function() {
 	    success:function (data) {
 	    	location.reload();
 	    }
+	});
+});
+
+
+$(".btn-borrar").click(function() {
+	var padre = $(this).parent().parent().parent();
+	var idprod = padre.find(".idprod")[0].innerText;
+	//borrar un producto
+	$.ajax({
+		url : '<?php echo $tiendaid; ?>/borrarprod/' + idprod,
+		type : 'delete',
+		success:function (data) {
+			location.reload();
+		}
 	});
 });
 

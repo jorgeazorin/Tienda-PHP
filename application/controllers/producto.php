@@ -73,18 +73,22 @@ public function nuevo($idtienda)
     $this->Producto_m->crear($datos,$idtienda);
   }
 
-/*
-  public function borrar($idcat)
+  public function borrar($idprod)
   {
-    $this->load->model("Categoria_m",'', TRUE);
-    $this->Categoria_m->borrar($idcat);
+    $this->load->model("Producto_m",'', TRUE);
+    $this->Producto_m->borrar($idprod);
   }
 
-  public function editar($idcat)
+  public function editar($idprod)
   {
-    $this->load->model("Categoria_m",'', TRUE);
-    $nombre = $_POST['nuevonombre'];
-    $this->Categoria_m->actualizar($idcat,$nombre);
+    $this->load->model("Producto_m",'', TRUE);
+    $nombre = $_POST['nombre'];
+    $especificaciones = $_POST['especificaciones'];
+    $descripcion = $_POST['descripcion'];
+    $precio = $_POST['precio'];
+    $subcategoriaId = $_POST['subcategoriaId'];
+    $tiendaId = $_POST['tiendaId'];
+    $this->Producto_m->actualizar($idprod,$nombre,$especificaciones,$descripcion,$precio,$subcategoriaId,$tiendaId);
   }
-*/
+
 }

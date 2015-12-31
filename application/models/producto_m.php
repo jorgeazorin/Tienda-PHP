@@ -35,4 +35,24 @@ class Producto_m extends CI_Model {
     );
     $this->db->insert('producto', $data);
   }
+
+  function borrar($idprod) {
+    $this->db->delete('producto', array('id' => $idprod));
+    return;
+  }
+
+  function actualizar($idprod,$nombre,$especificaciones,$descripcion,$precio,$subcategoriaId,$tiendaId) {
+    $data = array(
+     'nombre' => $nombre,
+     'especificaciones' => $especificaciones,
+     'descripcion' => $descripcion,
+     'precio' => $precio,
+     'subcategoriaId' => $subcategoriaId,
+     'tiendaId' => $tiendaId
+    );
+    $this->db->where('id', $idprod);
+    $this->db->update('producto', $data);
+ }
+
+
 }
