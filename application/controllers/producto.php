@@ -11,7 +11,7 @@ class Producto extends CI_Controller {
 	{
 
    // $this->load->model("Categoria_m",'', TRUE);
-    $data['titulo']="Listado de de productos de la tienda ";
+    $data['titulo']="Listado de productos de la tienda ";
     $data['tiendaid']=$tiendaid;
 
     $this->load->model("Producto_m",'', TRUE);

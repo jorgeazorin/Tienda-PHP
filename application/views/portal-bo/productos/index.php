@@ -84,6 +84,7 @@
 								<td>
 									<div class="btn-group">
 										<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
+										<a href='<?php echo $tiendaid; ?>/productos/<?php echo $producto->id; ?>' title="Administrar sus características" class="btn btn-info btn-caract"><span class="glyphicon glyphicon-eye-open"></span></a>
 										<a href='#' title="Editar producto" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
 										<a href='#' title="Borrar producto" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
 									</div>
