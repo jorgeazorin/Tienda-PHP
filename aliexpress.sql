@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2015 a las 19:07:33
+-- Tiempo de generación: 31-12-2015 a las 15:28:55
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caracteristicasprod` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `stock` int(11) NOT NULL,
   `productoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,8 +49,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(42, 'SELFIES'),
-(43, 'AAA');
+(42, 'Perfumes'),
+(43, 'Cosas serias');
 
 -- --------------------------------------------------------
 
@@ -152,6 +153,15 @@ CREATE TABLE `producto` (
   `subcategoriaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `especificaciones`, `descripcion`, `precio`, `tiendaId`, `subcategoriaId`) VALUES
+(2, 'KAKAKA', 'BAAAAA', 'TA WAPO', '0', 15, 6),
+(3, 'KAKAKA', 'BAAAAA', 'TA WAPO', '99', 15, 6),
+(7, 'KAPA', 'KEPO', 'KIPO', '0', 14, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -169,8 +179,10 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `nombre`, `categoriaId`) VALUES
-(5, 'a', 43),
-(6, 'b', 43);
+(5, 'Juguetes', 43),
+(6, 'Cuchillos', 43),
+(7, 'Con veneno', 42),
+(8, 'Chanel numero PI', 42);
 
 -- --------------------------------------------------------
 
@@ -185,6 +197,15 @@ CREATE TABLE `tienda` (
   `fechaapertura` date NOT NULL,
   `infocontacto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tienda`
+--
+
+INSERT INTO `tienda` (`id`, `nombre`, `localizacion`, `fechaapertura`, `infocontacto`) VALUES
+(14, 'Chinalandia', 'China', '2015-08-01', 'chinalandia@gmail.com'),
+(15, 'Amazon', 'Alemania?', '2015-09-03', 'amazon.co.uk'),
+(16, 'Tienda Pepe', 'España, Madrid', '2014-11-11', 'tiendapepe@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -302,7 +323,7 @@ ALTER TABLE `caracteristicasprod`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
@@ -332,17 +353,17 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Restricciones para tablas volcadas
 --
