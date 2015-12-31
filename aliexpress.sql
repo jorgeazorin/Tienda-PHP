@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2015 a las 12:22:54
+-- Tiempo de generación: 29-12-2015 a las 19:07:33
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -48,9 +48,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(38, 'COSAS'),
-(39, 'JUGUETES'),
-(40, 'ESPECIAS');
+(42, 'SELFIES'),
+(43, 'AAA');
 
 -- --------------------------------------------------------
 
@@ -165,6 +164,14 @@ CREATE TABLE `subcategoria` (
   `categoriaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `subcategoria`
+--
+
+INSERT INTO `subcategoria` (`id`, `nombre`, `categoriaId`) VALUES
+(5, 'a', 43),
+(6, 'b', 43);
+
 -- --------------------------------------------------------
 
 --
@@ -173,6 +180,7 @@ CREATE TABLE `subcategoria` (
 
 CREATE TABLE `tienda` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `localizacion` varchar(30) NOT NULL,
   `fechaapertura` date NOT NULL,
   `infocontacto` text NOT NULL
@@ -271,7 +279,8 @@ ALTER TABLE `subcategoria`
 -- Indices de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `tiendacliente`
@@ -293,7 +302,7 @@ ALTER TABLE `caracteristicasprod`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
@@ -328,12 +337,12 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
@@ -401,4 +410,3 @@ ALTER TABLE `tiendacliente`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

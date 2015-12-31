@@ -7,16 +7,14 @@ class Categoria extends CI_Controller {
     $this->load->database();
   }
 
-  public function index($idtienda)
+  public function index()
 	{
 
     $this->load->model("Categoria_m",'', TRUE);
     $data['titulo']="Listado de categorías";
-    $data['idtienda']=$idtienda;
-    //$data['cuantos']=$this->Agenda_m->count_all();
     $data['lista']=$this->Categoria_m->getCategorias();
 
-		$this->load->view('categorias/index', $data);
+		$this->load->view('portal-bo/categorias/index', $data);
 
 	}
 

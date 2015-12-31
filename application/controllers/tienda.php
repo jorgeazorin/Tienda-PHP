@@ -8,29 +8,40 @@ class Tienda extends CI_Controller {
   }
 
 
-  public function admin($id) {
-    $data['titulo']="Panel de control de la tienda " . $id;
-    $data['id'] = $id;
-    $this->load->view('tienda-bo/index', $data);
+  public function admin() {
+    $data['titulo']="Panel de control de Aliexpress ";
+
+    $this->load->model("Tienda_m",'', TRUE);
+    $data['lista_tiendas']=$this->Tienda_m->getTiendas();
+
+
+    $this->load->view('portal-bo/index', $data);
   }
-/*
-  public function index()
-	{
 
-    $this->load->model("Categoria_m",'', TRUE);
-    $data['titulo']="Listado de categorías";
-    //$data['cuantos']=$this->Agenda_m->count_all();
-    $data['lista']=$this->Categoria_m->view();
 
-		$this->load->view('categorias/index', $data);
+public function nuevo()
+{
+    $this->load->model("Tienda_m",'', TRUE);
+    $nombre = $_POST['nombre'];
+    $localizacion = $_POST['localizacion'];
+    $fechaapertura = $_POST['fechaapertura'];
+    $infocontacto = $_POST['infocontacto'];
 
-	}
+     $this->Tienda_m->crear($nombre,$localizacion,$fechaapertura,$infocontacto);
+}
 
-  public function nuevo()
-  {
-    $this->load->model("Categoria_m",'', TRUE);
-    $nombre = $_POST['nuevacat'];
-    $this->Categoria_m->add($nombre);
+  public function editar() {
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $localizacion = $_POST['localizacion'];
+    $fechaapertura = $_POST['fechaapertura'];
+    $infocontacto = $_POST['infocontacto'];
+    $this->load->model("Tienda_m",'', TRUE);
+    $this->Tienda_m->actualizar($id,$nombre,$localizacion,$fechaapertura,$infocontacto);
   }
-*/
+
+  public function borrar($id) {
+    $this->load->model("Tienda_m",'', TRUE);
+    $this->Tienda_m->borrar($id);
+  }
 }
