@@ -9,6 +9,11 @@ class Tienda extends CI_Controller {
 
 
   public function admin() {
+    if($this->session->userdata('userName')!="admin") //solo puede entrar el admin
+    {
+
+      redirect('/');
+    }
     $data['titulo']="Panel de control de Aliexpress ";
 
     $this->load->model("Tienda_m",'', TRUE);
