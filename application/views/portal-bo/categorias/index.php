@@ -19,12 +19,12 @@
 		    <a href="#categoria-<?php echo $categoria->id; ?>" class="list-group-item clickable" data-toggle="collapse">
 		    	<div class="row">
 		    		<div class="col-sm-4">
-		      			<h4><i class="glyphicon glyphicon-chevron-right"></i><?php echo $categoria->nombre; ?></h4>
+		      			<h4><i class="glyphicon glyphicon-chevron-right"></i><?php echo $categoria->nombre; ?> <span class="error" style="color:red;display:none">Campo obligatorio</span></h4>
 		      		</div>
 		      		<div class="col-sm-4">
 		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit" style="display:none">
 		      				<div>
-		      					<input type="text" id="input<?php echo $categoria->id; ?>" value="<?php echo $categoria->nombre; ?>" placeholder="Nuevo nombre de categoría..." class="form-control">
+		      					<input type="text" id="input<?php echo $categoria->id; ?>" value="<?php echo $categoria->nombre; ?>" placeholder="Nuevo nombre de categoría..." class="form-control" required>
 		      				</div>
 		      				<span class="input-group-btn">
 			        			<button class="btn btn-success btn-guardar-cambios" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-check"></span></button>
@@ -54,6 +54,7 @@
 			    		<div data-id="<?php echo $subcategoria->id; ?>" data-catid="<?php echo $subcategoria->categoriaId; ?>" class="row">
 		    				<div class="col-sm-4">
 			    				<strong><?php echo $subcategoria->nombre; ?></strong>
+			    				<span class="error" style="color:red;display:none">Campo obligatorio</span>
 			    			</div>
 
 			    			<div class="col-sm-4">
@@ -94,7 +95,7 @@
 		    ?>
 		    	<div class="row">
 				  	<div class="col-sm-4">
-				  		<span id="error<?php echo $categoria->id; ?>" class="error-subcat" style="color:red;display:none"></span>
+				  		<span id="error<?php echo $categoria->id; ?>" class="error" style="color:red;display:none"></span>
 					    <div class="input-group">
 					      <input type="text" class="form-control nuevasubcat" placeholder="Introduce nueva subcategoría..." required>
 					      <span class="input-group-btn">
@@ -115,7 +116,7 @@
 	</div>
 	<div class="row">
 		  	<div class="col-sm-4">
-		  		<span id="error-nombre" style="color:red;display:none"></span>
+		  		<span id="error-nombre" class="error" style="color:red;display:none"></span>
 			    <div class="input-group">
 			      <input type="text" class="form-control" name="nuevacat" id="nuevacat" placeholder="Introduce nueva categoría..." required>
 			      <span class="input-group-btn">
@@ -144,7 +145,7 @@
 $(document).ready(function () {
 
 	$("#btn-crear").click(function () {
-		$("#error-nombre").hide();
+		$(".error").hide();
 		var nombre = $('#nuevacat').val();
 		if(nombre) {	
 			 $.ajax({
@@ -165,7 +166,7 @@ $(document).ready(function () {
 	$(".btn-crear-subcat").click(function(){
 		var data = $(this).parent().parent().find(".nuevasubcat")[0].value;
 		var idcat = $(this).attr("data-idcat");
-		$(".error-subcat").hide(); //escondemos error
+		$(".error").hide(); //escondemos error
 		if(data)
 		{
 			$.ajax({
@@ -247,6 +248,7 @@ $(document).ready(function () {
 
 	//guardar cambios para cambiar nombre de categoria
 	$(".btn-guardar-cambios").click(function(){
+		$(".error").hide(); //escondemos error
 		event.stopPropagation();
 		var id = $(this).attr('data-id');
 		//console.log(id);
@@ -262,12 +264,17 @@ $(document).ready(function () {
 		        }
 		    });
 		}
+		else
+		{
+			$(this).parent().parent().parent().parent().find(".error")[0].style.display="inline";
+		}
 
 
 	});
 
 	//guardar cambios para cambiar nombre de subcategoria
 	$(".btn-guardar-cambios-subcat").click(function(){
+		$(".error").hide(); //escondemos error
 		var id = $(this).attr('data-id');
 		//var catid = $(this).attr('data-catid');
 		var catid = $("#textsubcat" + id +" select").val();
@@ -287,6 +294,10 @@ $(document).ready(function () {
 		        	window.location.href="categorias";
 		        }
 		    });
+		}
+		else
+		{
+			$(this).parent().parent().parent().parent().find(".error")[0].style.display="inline";
 		}
 
 
