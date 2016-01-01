@@ -30,8 +30,8 @@ class Producto_m extends CI_Model {
      'especificaciones' => $datos[1],
      'descripcion' => $datos[2],
      'precio' => $datos[3],
-     'tiendaId' => $idtienda,
-     'subcategoriaId' => $datos[5]
+      'subcategoriaId' => $datos[4],
+     'tiendaId' => $idtienda
     );
     $this->db->insert('producto', $data);
   }

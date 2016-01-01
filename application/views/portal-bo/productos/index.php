@@ -100,74 +100,46 @@
 		}
 	}
 	?>
-			<h2>Añadir nuevo producto para la tienda</h2>
-			<div class="container form-crear-prod"> 
-						<p>
-							Nombre:
+			<div id="crear-prod">
+				<h2>Añadir nuevo producto para la tienda <span class="error" style="color:red;display:none">Campos obligatorios</span></h2>
+				<div class="container form-crear-prod">
+					<div class="row">
+						<div class="col-sm-2">
 							<input placeholder="Nombre..." class="form-control" type="text" />
-						</p>
-						<p>
-							Especificaciones:
+						</div>
+						<div class="col-sm-2">
 							<input placeholder="Especificaciones..." class="form-control" type="text" />
-						</p>
-						<p>
-							Descripción:
+						</div>
+						<div class="col-sm-2">
 							<input placeholder="Descripción..." class="form-control" type="text"  />
-						</p>
-						<p>
-							Precio:
-							<input placeholder="Precio..." class="form-control" type="text" />
-						</p>
+						</div>
+						<div class="col-sm-2">
+							<input placeholder="Precio..." class="form-control" type="number" min="0" step="any" />
+						</div>
 
-						<p>
-							Categoría:
-							<select class="form-control" id="nuevocat">
+						<div class="col-sm-2">
+							<select class="form-control" id="nuevosubcat">
 								<?php
-								if(!is_null($lista_subcategorias)) 
-								{ //si no es nula
-									echo "<option value='-1'>Selecciona una categoría...</option>";
-									foreach ($lista_subcategorias as $categoria) 
+								echo "<option value='-1'>Selecciona...</option>";
+									foreach ($lista_subcategorias as $categoria)
 									{
-										echo "<option value=" . $categoria->id . ">" . $categoria->nombre . "</option>";
+										foreach ($categoria->subcategorias as $subcategoria)
+										{
+											echo "<option value=" . $subcategoria->id . " data-catid=" . $subcategoria->categoriaId . ">" . $subcategoria->nombre . "</option>";
+										}
 									}
-								}
-								else
-								{
-									echo "<option value=-1>No existe ninguna categoría...</option>";
-								}
 								?>
 							</select>
+						</div>
 
-							<span style="display:none">
-								Subcategoría:
-								<select class="form-control" id="nuevosubcat">
-									<?php
-									echo "<option value='-1'>Selecciona una subcategoría...</option>";
-										foreach ($lista_subcategorias as $categoria)
-										{
-											foreach ($categoria->subcategorias as $subcategoria)
-											{
-												echo "<option style='display:none' value=" . $subcategoria->id . " data-catid=" . $subcategoria->categoriaId . ">" . $subcategoria->nombre . "</option>";
-											}
-										}
-									?>
-								</select>
-							</span>
-
-
-						</p>
-
-
-
-
-
-
-						<p>
-							<a href='#' title="Crear producto" class="btn btn-primary btn-success btn-crear">
+						<div class="col-sm-2">
+							<button title="Crear producto" class="btn btn-primary btn-success btn-crear">
 								<span class="glyphicon glyphicon-plus"></span>
-							</a>
-						</p>
-			</div> 
+							</button>
+						</div>
+					</div>
+				</div> 
+			</div>
 
 </main>
 
@@ -267,36 +239,12 @@ $('.btn-guardar').click(function () {
 
 
 
-
-
-$('select#nuevocat').change(function() {
-      // var seleccionao = $("select option:selected").attr('value');
-      var catselecc = $(this).val();
-      if(catselecc!=-1) { //cargar las subcategorias
-      	//lo que habra que hacer es, que borre las subcategorias que no sean de esa cat
-
-      	//analiza cada opcion
-      	$("#nuevosubcat option").each(function()
-		{
-			$(this).hide();
-			var catid = $(this).attr("data-catid");
-			if(catid==catselecc || catid==undefined)
-				$(this).show();
-		});
-
-      	$("#nuevosubcat").parent().show();
-      }
-      else
-      {
-      	$("#nuevosubcat").parent().hide();
-      }
-
-
-});
-
 $(".btn-crear").click(function() {
 	var form = $(".form-crear-prod");
 	var inputs = form.find(":input");
+
+
+	$(".error").hide(); //escondemos errores
 
 	var valores_post = [];
 	for(var i = 0; i< inputs.length;i++) {
@@ -305,7 +253,7 @@ $(".btn-crear").click(function() {
 		{
 			if(input.value=="")
 			{
-				//console.log("ERROR INPUT VACIO");
+				$("#crear-prod").find(".error")[0].style.display="inline";
 				return;
 			}
 
@@ -314,7 +262,7 @@ $(".btn-crear").click(function() {
 		{
 			if(input.value=="-1")
 			{
-				//console.log("ERROR SELECT VACIO");
+				$("#crear-prod").find(".error")[0].style.display="inline";
 				return;
 			}
 		}
@@ -338,11 +286,16 @@ $(".btn-borrar").click(function() {
 	var padre = $(this).parent().parent().parent();
 	var idprod = padre.find(".idprod")[0].innerText;
 	//borrar un producto
-	$.ajax({
-		url : '<?php echo $tiendaid; ?>/borrarprod/' + idprod,
-		type : 'delete',
-		success:function (data) {
-			location.reload();
+	bootbox.confirm("¿Estás seguro? También se borrarán sus diferentes características.", function(seguro) {
+		if(seguro)
+		{
+			$.ajax({
+				url : '<?php echo $tiendaid; ?>/borrarprod/' + idprod,
+				type : 'delete',
+				success:function (data) {
+					location.reload();
+				}
+			});
 		}
 	});
 });
