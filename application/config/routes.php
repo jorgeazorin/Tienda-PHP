@@ -46,7 +46,8 @@ $route['404_override'] = '';
 
 
 $route['login'] = 'login/index';
-$route['login/validar'] = 'login/validar';
+$route['login/validar'] = 'login/iniciarsesion';
+$route['logout'] = 'login/cerrarsesion';
 
 
 

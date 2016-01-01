@@ -30,8 +30,6 @@ $("#btn-login").click(function() {
 	        type : 'POST',
 	        data : datos,
 	        success:function (data) {
-	        	//location.reload();
-	        	//console.log(data);
 	        	window.location.href=data;
 	        }
 		});

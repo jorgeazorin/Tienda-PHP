@@ -13,7 +13,15 @@ class Login extends CI_Controller {
 
   }
 
-  public function validar()
+
+  public function cerrarsesion() 
+  {
+    $this->session->sess_destroy();
+    redirect('/login');
+  }
+
+
+  public function iniciarsesion()
   {
    // $this->load->model("Login_m",'', TRUE);
     $login = $_POST['login'];
