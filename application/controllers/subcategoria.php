@@ -7,19 +7,6 @@ class Subcategoria extends MY_Controller {
     $this->load->database();
   }
 
-  public function index($idcat)
-	{
-
-    $this->load->model("Subcategoria_m",'', TRUE);
-    $data['titulo']="Subcategorías de la categoría " . $idcat;
-    $data['idcat']=$idcat;
-
-    $data['lista']=$this->Subcategoria_m->getSubcategorias($idcat);
-		$this->load->view('portal-bo/subcategorias/index', $data);
-
-	}
-
-
   public function nuevo($idcat)
   {
     $this->load->model("Subcategoria_m",'', TRUE);

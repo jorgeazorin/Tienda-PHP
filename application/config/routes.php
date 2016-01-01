@@ -76,7 +76,6 @@ $route['admin/categorias/(:num)/borrar'] = 'categoria/borrar/$1'; //BORRAR
 $route['admin/categorias/(:num)/editar'] = 'categoria/editar/$1'; //EDITAR
 
 //administrar subcategorias de una categoria de tienda
-$route['admin/categorias/(:num)'] = "subcategoria/index/$1"; //PAGINA DE ADMINISTRACION DE SUBCATEGORIAS DE CAT
 $route['admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$1"; //CREAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$2"; //BORRAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/editar'] = "subcategoria/editar/$2"; //EDITAR SUBCATEGORIA
