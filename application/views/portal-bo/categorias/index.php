@@ -2,17 +2,24 @@
   $this->load->view('inc/cabecera.php');
  ?>
 
+<link href = "<?php echo base_url(); ?>assets/css/lista-categorias.css” rel=”stylesheet" type="text/css" />
 
 <main>
 	<h1><?php echo $titulo; ?></h1>
 
 
-	<div class="container">
-	  <?php
-	  	if (!is_null($lista)) {
-		    foreach ($lista as $categoria) {
-		      ?> <div class="row">
-		      		<div class="col-sm-4"><h4><?php echo $categoria->nombre; ?></h4></div>
+<div class="just-padding">
+	<div class="list-group list-group-root">
+
+		<?php
+		if (!is_null($lista)) {
+			$i=0;
+			foreach ($lista as $categoria) {?>
+		    <a href="#categoria-<?php echo $categoria->id; ?>" class="list-group-item" data-toggle="collapse">
+		    	<div class="row">
+		    		<div class="col-sm-4">
+		      			<i class="glyphicon glyphicon-chevron-right"></i><?php echo $categoria->nombre; ?>
+		      		</div>
 		      		<div class="col-sm-4">
 		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit" style="display:none">
 		      				<div>
@@ -24,22 +31,36 @@
 		      			</div>
 		      		</div>
 		      		<div class="col-sm-4">
-		      			<div class="btn-group" role="group" aria-label="Botones de acción">
-		      			<a href='categorias/<?php echo $categoria->id; ?>'title="Administrar subcategorías" class="btn btn-info btn-subcat"><span class="glyphicon glyphicon-eye-open"></span>
-		      			</a>
-		      			<button title="Editar categoría" class="btn btn-warning btn-editar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
-		      			</button>
-		      			<button title="Borrar categoría" class="btn btn-danger btn-borrar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-trash"></span>
+		      			<div class="btn-group" role="group" aria-label="Acciones de categorías">
+		      				<button title="Editar categoría" class="btn btn-warning btn-editar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
+		      				</button>
+		      				<button title="Borrar categoría" class="btn btn-danger btn-borrar" data-id="<?php echo $categoria->id; ?>"><span class="glyphicon glyphicon-trash"></span>
 		      			</button>
 		      			</div>
 		      		</div>
-		      	</div>
-		        <?php
-		    }
-		}
-	  ?>
 
-		<div class="row">
+		  		</div>
+		    </a>
+		    <div class="list-group collapse" id="categoria-<?php echo $categoria->id; ?>">
+
+		    <?php
+		    	if (!is_null($subcategorias[$i]))
+		    	{
+			    	foreach ($subcategorias[$i] as $subcategoria)
+			    		echo "<a href='#'' class='list-group-item'>" . $subcategoria->nombre . "</a>";
+			    }
+		    ?>
+
+		    </div>
+		    <?php
+		    $i++;
+			}
+		}
+		?>
+
+	  
+	</div>
+	<div class="row">
 		  	<div class="col-sm-4">
 			    <div class="input-group">
 			      <input type="text" class="form-control" name="nuevacat" id="nuevacat" placeholder="Introduce nueva categoría..." required>
@@ -49,7 +70,18 @@
 			    </div><!-- /input-group -->
 		  	</div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
-	</div><!--container-->
+</div>
+  
+
+
+
+
+
+
+
+
+
+
 </main>
 
 
@@ -90,6 +122,7 @@ $(document).ready(function () {
 
 	//mostrar form de editar
 	$(".btn-editar").click(function(){
+		event.stopPropagation();
 		$(".text-edit").hide(); //ocultamos los demas
 		var id = $(this).attr('data-id');
 		var textinput = "#text" + id;
@@ -117,5 +150,22 @@ $(document).ready(function () {
 
 
 	});
+
+
+	$('.list-group-item').on('click', function() {
+		var derecha = $(this).find("i")[0].outerHTML.indexOf("right") > -1;
+		if(derecha)
+		{
+	    	$('.glyphicon-chevron-right', this)
+	      .toggleClass('glyphicon-chevron-right')
+	      .toggleClass('glyphicon-chevron-down');
+	  	}
+	  	else
+	  	{
+	  		$('.glyphicon-chevron-down', this)
+	      .toggleClass('glyphicon-chevron-down')
+	      .toggleClass('glyphicon-chevron-right');
+	  	}
+  	});
 });
 </script>
