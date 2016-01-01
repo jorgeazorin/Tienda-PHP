@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-12-2015 a las 16:53:43
+-- Tiempo de generación: 01-01-2016 a las 20:16:35
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -49,7 +49,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(43, 'Cosas serias');
+(49, 'Perifericos'),
+(51, 'Otros'),
+(52, 'Consolas');
 
 -- --------------------------------------------------------
 
@@ -63,6 +65,13 @@ CREATE TABLE `cliente` (
   `password` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `userName`, `password`, `email`) VALUES
+(1, 'paco', 'paco', 'paco@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -169,8 +178,7 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `nombre`, `categoriaId`) VALUES
-(5, 'Juguetes', 43),
-(6, 'Cuchillos', 43);
+(21, 'Ratones', 49);
 
 -- --------------------------------------------------------
 
@@ -185,13 +193,6 @@ CREATE TABLE `tienda` (
   `fechaapertura` date NOT NULL,
   `infocontacto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tienda`
---
-
-INSERT INTO `tienda` (`id`, `nombre`, `localizacion`, `fechaapertura`, `infocontacto`) VALUES
-(16, 'Tienda Pepe', 'España, Madrid', '2014-11-11', 'tiendapepe@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -286,8 +287,7 @@ ALTER TABLE `subcategoria`
 -- Indices de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tiendacliente`
@@ -304,17 +304,17 @@ ALTER TABLE `tiendacliente`
 -- AUTO_INCREMENT de la tabla `caracteristicasprod`
 --
 ALTER TABLE `caracteristicasprod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `direnvio`
 --
@@ -339,17 +339,17 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- Restricciones para tablas volcadas
 --
