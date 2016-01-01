@@ -5,6 +5,7 @@
 <link href = "<?php echo base_url(); ?>assets/css/lista-categorias.css” rel=”stylesheet" type="text/css" />
 
 <main>
+	<a href="<?php echo base_url(); ?>admin" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
 	<h1><?php echo $titulo; ?></h1>
 
 
@@ -18,7 +19,7 @@
 		    <a href="#categoria-<?php echo $categoria->id; ?>" class="list-group-item clickable" data-toggle="collapse">
 		    	<div class="row">
 		    		<div class="col-sm-4">
-		      			<h4><i class="glyphicon glyphicon-chevron-right"></i>Categoría <?php echo $categoria->nombre; ?></h4>
+		      			<h4><i class="glyphicon glyphicon-chevron-right"></i><?php echo $categoria->nombre; ?></h4>
 		      		</div>
 		      		<div class="col-sm-4">
 		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit" style="display:none">
@@ -93,6 +94,7 @@
 		    ?>
 		    	<div class="row">
 				  	<div class="col-sm-4">
+				  		<span id="error<?php echo $categoria->id; ?>" class="error-subcat" style="color:red;display:none"></span>
 					    <div class="input-group">
 					      <input type="text" class="form-control nuevasubcat" placeholder="Introduce nueva subcategoría..." required>
 					      <span class="input-group-btn">
@@ -113,6 +115,7 @@
 	</div>
 	<div class="row">
 		  	<div class="col-sm-4">
+		  		<span id="error-nombre" style="color:red;display:none"></span>
 			    <div class="input-group">
 			      <input type="text" class="form-control" name="nuevacat" id="nuevacat" placeholder="Introduce nueva categoría..." required>
 			      <span class="input-group-btn">
@@ -141,7 +144,7 @@
 $(document).ready(function () {
 
 	$("#btn-crear").click(function () {
-		console.log("CLICK");
+		$("#error-nombre").hide();
 		var nombre = $('#nuevacat').val();
 		if(nombre) {	
 			 $.ajax({
@@ -153,9 +156,8 @@ $(document).ready(function () {
 		        }
 		    });
 		}
-		else { //intentando que me salga el mensajito de chrome de campo obligatorio
-			 //$('#form').find(':submit').click()
-			 //$('#form')[0].checkValidity()
+		else {
+			 $("#error-nombre").html("¡El nombre no puede estar vacío!").show();
 		}
 	});
 
@@ -163,6 +165,7 @@ $(document).ready(function () {
 	$(".btn-crear-subcat").click(function(){
 		var data = $(this).parent().parent().find(".nuevasubcat")[0].value;
 		var idcat = $(this).attr("data-idcat");
+		$(".error-subcat").hide(); //escondemos error
 		if(data)
 		{
 			$.ajax({
@@ -174,6 +177,10 @@ $(document).ready(function () {
 	        }
 			});
 		}
+		else
+		{
+			$("#error" + idcat).html("¡El nombre no puede estar vacío!").show();
+		}
 	});
 
 
@@ -181,13 +188,19 @@ $(document).ready(function () {
 	$(".btn-borrar").click(function(){
 		event.stopPropagation();
 		var data = $(this).attr('data-id');
-  		$.ajax({
-	        url : 'categorias/' + data + '/borrar',
-	        type : 'delete',
-	        success:function (data) {
-	        	location.reload();
-	        }
-		});
+
+		bootbox.confirm("¿Estás seguro? También se borrarán sus subcategorías y sus productos.", function(seguro) {
+			if(seguro)
+			{
+		  		$.ajax({
+			        url : 'categorias/' + data + '/borrar',
+			        type : 'delete',
+			        success:function (data) {
+			        	location.reload();
+			        }
+				});
+		  	}
+	  	});
 	});
 
 	//borrar una subcategoria
@@ -195,13 +208,18 @@ $(document).ready(function () {
 		var nodo = $(this).parent().parent().parent();
 		var data = nodo.attr('data-id');
 		var idcat = nodo.attr("data-catid");
-  		$.ajax({
-	        url : 'categorias/' + idcat + '/subcat/' + data + '/borrar',
-	        type : 'delete',
-	        success:function (data) {
-	        	location.reload();
-	        }
-		});
+		bootbox.confirm("¿Estás seguro? Perderás todos los productos que estén asociados a esta subcategoría.", function(seguro) {
+	  		if(seguro)
+			{
+		  		$.ajax({
+			        url : 'categorias/' + idcat + '/subcat/' + data + '/borrar',
+			        type : 'delete',
+			        success:function (data) {
+			        	location.reload();
+			        }
+				});
+		  	}
+		}); 
 	});
 
 	//mostrar form de editar categoria
