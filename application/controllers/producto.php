@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Producto extends CI_Controller {
+class Producto extends MY_Controller {
 
   function __construc(){
     parent::__construc();

@@ -1,21 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Tienda extends CI_Controller {
+class Tienda extends MY_Controller{
 
-  function __construc(){
+  function __construc(){ 
     parent::__construc();
     $this->load->database();
   }
 
 
-  public function admin() {
-    if($this->session->userdata('userName')!="admin") //solo puede entrar el admin
-    {
-
-      redirect('/');
-    }
+  public function admin() 
+  {
     $data['titulo']="Panel de control de Aliexpress ";
-
     $this->load->model("Tienda_m",'', TRUE);
     $data['lista_tiendas']=$this->Tienda_m->getTiendas();
 
@@ -31,8 +26,7 @@ public function nuevo()
     $localizacion = $_POST['localizacion'];
     $fechaapertura = $_POST['fechaapertura'];
     $infocontacto = $_POST['infocontacto'];
-
-     $this->Tienda_m->crear($nombre,$localizacion,$fechaapertura,$infocontacto);
+    $this->Tienda_m->crear($nombre,$localizacion,$fechaapertura,$infocontacto);
 }
 
   public function editar() {

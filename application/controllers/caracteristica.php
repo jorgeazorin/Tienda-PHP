@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Caracteristica extends CI_Controller {
+class Caracteristica extends MY_Controller {
 
   function __construc(){
     parent::__construc();

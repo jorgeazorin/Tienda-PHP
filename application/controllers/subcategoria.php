@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Subcategoria extends CI_Controller {
+class Subcategoria extends MY_Controller {
 
   function __construc(){
     parent::__construc();
