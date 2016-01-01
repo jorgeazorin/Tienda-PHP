@@ -51,6 +51,10 @@ class Login extends CI_Controller {
         $this->session->set_userdata($datos);
         echo "paginaprincipal"; //url para ir a la pagina principal
       }
+      else
+      {
+        echo "ERROR";
+      }
     }
   }
 
