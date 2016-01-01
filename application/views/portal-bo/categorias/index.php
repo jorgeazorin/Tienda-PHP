@@ -9,7 +9,7 @@
 
 
 <div class="just-padding">
-	<div class="list-group list-group-root">
+	<div class="list-group list-group-root well">
 
 		<?php
 		if (!is_null($lista)) {
@@ -18,7 +18,7 @@
 		    <a href="#categoria-<?php echo $categoria->id; ?>" class="list-group-item" data-toggle="collapse">
 		    	<div class="row">
 		    		<div class="col-sm-4">
-		      			<i class="glyphicon glyphicon-chevron-right"></i><?php echo $categoria->nombre; ?>
+		      			<h4><i class="glyphicon glyphicon-chevron-right"></i>Categoría <?php echo $categoria->nombre; ?></h4>
 		      		</div>
 		      		<div class="col-sm-4">
 		      			<div id="text<?php echo $categoria->id; ?>" class="input-group text-edit" style="display:none">
@@ -47,9 +47,21 @@
 		    	if (!is_null($subcategorias[$i]))
 		    	{
 			    	foreach ($subcategorias[$i] as $subcategoria)
-			    		echo "<a href='#'' class='list-group-item'>" . $subcategoria->nombre . "</a>";
+			    		echo "<a href='#' class='list-group-item'>" . "<strong>Subcategoría " . $subcategoria->nombre . "</strong></a>";
 			    }
+
+
 		    ?>
+		    	<div class="row">
+				  	<div class="col-sm-4">
+					    <div class="input-group">
+					      <input type="text" class="form-control nuevasubcat" placeholder="Introduce nueva subcategoría..." required>
+					      <span class="input-group-btn">
+					        <button data-idcat="<?php echo $subcategoria->categoriaId; ?>" class="btn btn-primary btn-crear-subcat"><span class="glyphicon glyphicon-plus"></span></button>
+					      </span>
+					    </div><!-- /input-group -->
+				  	</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
 
 		    </div>
 		    <?php
@@ -69,7 +81,7 @@
 			      </span>
 			    </div><!-- /input-group -->
 		  	</div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
+	</div><!-- /.row -->
 </div>
   
 
@@ -104,6 +116,23 @@ $(document).ready(function () {
 		else { //intentando que me salga el mensajito de chrome de campo obligatorio
 			 //$('#form').find(':submit').click()
 			 //$('#form')[0].checkValidity()
+		}
+	});
+
+	//crear subcategoria
+	$(".btn-crear-subcat").click(function(){
+		var data = $(this).parent().parent().find(".nuevasubcat")[0].value;
+		var idcat = $(this).attr("data-idcat");
+		if(data)
+		{
+			$.ajax({
+	        url : 'categorias/' + idcat + '/crearsubcat',
+	        type : 'POST',
+	        data: {nombre:data},
+	        success:function() {
+	        	location.reload();
+	        }
+			});
 		}
 	});
 
