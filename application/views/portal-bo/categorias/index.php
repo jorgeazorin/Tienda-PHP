@@ -56,23 +56,25 @@
 			    			</div>
 
 			    			<div class="col-sm-4">
-			    				
-
-			    			<div id="textsubcat<?php echo $subcategoria->id; ?>" class="input-group text-edit" style="display:none">
-			      				<div>
-			      					<input type="text" id="inputsubcat<?php echo $subcategoria->id; ?>" value="<?php echo $subcategoria->nombre; ?>" placeholder="Nuevo nombre de subcategoría..." class="form-control">
+			    			<span class="form-inline" role="form">
+				    			<div id="textsubcat<?php echo $subcategoria->id; ?>" class="text-edit" style="display:none">
+				    				<input type="text" id="inputsubcat<?php echo $subcategoria->id; ?>" value="<?php echo $subcategoria->nombre; ?>" placeholder="Nuevo nombre de subcategoría..." class="form-control">
+				    				<select class="form-control">
+				      					<?php
+										foreach ($lista as $categoriaselect)
+										{
+											echo "<option value=" . $categoriaselect->id .  ">" . $categoriaselect->nombre . "</option>";
+										}
+									?>
+				      				</select>
+				      				<button class="btn btn-success btn-guardar-cambios-subcat" data-catid="<?php echo $subcategoria->categoriaId; ?>" data-id="<?php echo $subcategoria->id; ?>"><span class="glyphicon glyphicon-check"></span></button>
 			      				</div>
-			      				<span class="input-group-btn">
-				        			<button class="btn btn-success btn-guardar-cambios-subcat" data-catid="<?php echo $subcategoria->categoriaId; ?>" data-id="<?php echo $subcategoria->id; ?>"><span class="glyphicon glyphicon-check"></span></button>
-				      			</span>
-		      				</div>
-
-
+			      			</span>
 			    			</div>
 
 			    			<div class="col-sm-4">
 			    				<div class="btn-group btn-group-sm" role="group" aria-label="Acciones de subcategorías">
-			    					<button title="Editar subcategoría" class="btn btn-warning btn-editar-subcat" data-id="<?php echo $subcategoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
+			    					<button title="Editar subcategoría" class="btn btn-warning btn-editar-subcat" data-catid="<?php echo $subcategoria->categoriaId; ?>" data-id="<?php echo $subcategoria->id; ?>"><span class="glyphicon glyphicon-edit"></span>
 		      						</button>
 		      						<button title="Borrar subcategoría" class="btn btn-danger btn-borrarsubcat"><span class="glyphicon glyphicon-trash"></span>
 		      						</button>
@@ -217,8 +219,10 @@ $(document).ready(function () {
 	$(".btn-editar-subcat").click(function(){
 		$(".text-edit").hide(); //ocultamos los demas
 		var id = $(this).attr('data-id');
+		var catid= $(this).attr('data-catid');
 		var textinput = "#textsubcat" + id;
 		if($(textinput).css('display') == 'none' ){ //eso es que queremos abrir el inputtext
+			$(textinput + " select").val(catid);
     		$(textinput).show();
 		}
 	});
@@ -247,16 +251,22 @@ $(document).ready(function () {
 	//guardar cambios para cambiar nombre de subcategoria
 	$(".btn-guardar-cambios-subcat").click(function(){
 		var id = $(this).attr('data-id');
-		var catid = $(this).attr('data-catid');
+		//var catid = $(this).attr('data-catid');
+		var catid = $("#textsubcat" + id +" select").val();
 		var nombre = $("#inputsubcat" + id).val();
-		if(nombre!=undefined && nombre!="")
+
+		console.log(id);
+		console.log(nombre);
+		console.log(catid);
+		if(nombre!=undefined && nombre!="" && catid)
 		{
 			$.ajax({
 		        url : 'categorias/' + catid + '/subcat/' + id + '/editar',
 		        type : 'POST',
-		        data : {nuevonombre:nombre},
+		        data : {nuevonombre:nombre,
+		        		nuevacategoria:catid},
 		        success:function (data) {
-		        	location.reload();
+		        	window.location.href="categorias";
 		        }
 		    });
 		}
@@ -265,7 +275,7 @@ $(document).ready(function () {
 	});
 
 
-	$('.list-group-item clickable').on('click', function() {
+	$(".clickable").click(function() {
 		var derecha = $(this).find("i")[0].outerHTML.indexOf("right") > -1;
 		if(derecha)
 		{

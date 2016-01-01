@@ -37,7 +37,8 @@ class Subcategoria extends MY_Controller {
   {
     $this->load->model("Subcategoria_m",'', TRUE);
     $nombre = $_POST['nuevonombre'];
-    $this->Subcategoria_m->actualizar($idsubcat,$nombre);
+    $categoriaId = $_POST['nuevacategoria'];
+    $this->Subcategoria_m->actualizar($idsubcat,$nombre,$categoriaId);
   }
 
 }
