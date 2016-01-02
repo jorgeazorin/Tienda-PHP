@@ -64,7 +64,7 @@ $route['admin/tiendas/(:num)/borrarprod/(:num)'] = 'producto/borrar/$2';
 $route['admin/tiendas/(:num)/editarprod/(:num)'] = 'producto/editar/$2';
 
 
-$route['admin/tiendas/(:num)/productos/(:num)'] = 'caracteristica/index/$2'; //pagina de administracion de caracteristicas de producto
+$route['admin/tiendas/(:num)/productos/(:num)'] = 'caracteristica/index/$2/$1'; //pagina de administracion de caracteristicas de producto
 $route['admin/tiendas/(:num)/productos/(:num)/crearcaracteristica'] = 'caracteristica/nuevo/$2';
 $route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/borrar'] = 'caracteristica/borrar/$3';
 $route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/editar'] = 'caracteristica/editar/$3';

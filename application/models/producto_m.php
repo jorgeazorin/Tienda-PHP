@@ -23,6 +23,10 @@ class Producto_m extends CI_Model {
   }
  }
 
+  function getProducto($idproducto) {
+    return $this->db->get_where('producto',array('id' => $idproducto))->row();
+ }
+
  function crear($datos,$idtienda) {
     print_r($datos);
     $data = array(
