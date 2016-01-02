@@ -23,6 +23,10 @@ class Producto_m extends CI_Model {
   }
  }
 
+  function getProducto($idproducto) {
+    return $this->db->get_where('producto',array('id' => $idproducto))->row();
+ }
+
  function crear($datos,$idtienda) {
     print_r($datos);
     $data = array(
@@ -30,8 +34,8 @@ class Producto_m extends CI_Model {
      'especificaciones' => $datos[1],
      'descripcion' => $datos[2],
      'precio' => $datos[3],
-     'tiendaId' => $idtienda,
-     'subcategoriaId' => $datos[5]
+      'subcategoriaId' => $datos[4],
+     'tiendaId' => $idtienda
     );
     $this->db->insert('producto', $data);
   }

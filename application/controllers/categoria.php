@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Categoria extends CI_Controller {
+class Categoria extends MY_Controller {
 
   function __construc(){
     parent::__construc();
@@ -11,8 +11,21 @@ class Categoria extends CI_Controller {
 	{
 
     $this->load->model("Categoria_m",'', TRUE);
+    $this->load->model("Subcategoria_m",'', TRUE);
+
     $data['titulo']="Listado de categorías";
-    $data['lista']=$this->Categoria_m->getCategorias();
+    $lista = $this->Categoria_m->getCategorias();
+    $data['lista']=$lista;
+
+    $i = 0;
+    $subcategorias = array(array());
+    foreach ($lista as $categoria)
+    {
+      $subcategorias[$i]=$this->Subcategoria_m->getSubCategorias($categoria->id);
+      ++$i;
+    }
+
+    $data['subcategorias'] = $subcategorias;
 
 		$this->load->view('portal-bo/categorias/index', $data);
 

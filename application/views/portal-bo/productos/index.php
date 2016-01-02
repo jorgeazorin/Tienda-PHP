@@ -4,170 +4,144 @@
 
 
 <main>
-	<h1><?php echo $titulo; ?> <?php echo $tiendaid; ?></h1>
+	<a href="<?php echo base_url(); ?>admin" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
+	<h1><?php echo $titulo; ?> <?php echo $nombretienda; ?></h1>
 
 	<?php
 
-	if(!is_null($lista_subcategorias)) 
+	if(!is_null($lista)) 
 	{ //si no es nula
-		foreach ($lista_subcategorias as $categoria) 
-		{
 		?>
-			<h3>Categoría <?php echo $categoria->nombre; ?></h3>
-			<?php 
-			if(count($categoria->subcategorias)==0) {
-				echo "<h4>No hay subcategorías...</h4>";
-			}
-			else
-			{
-				foreach ($categoria->subcategorias as $subcategoria)
-				{
-					echo "<h4>Subcategoría " . $subcategoria->nombre . " ---- " . count($subcategoria->productos) . " productos</h4>";
+			<table class="table table-hover"> 
+				<thead style="background-color:grey"> 
+					<tr> 
+						<th>ID</th> 
+						<th>Nombre</th>
+						<th>Especificaciones</th>
+						<th>Descripción</th> 
+						<th>Precio</th>
+						<th>Subcategoría</th>
+						<th>Acciones</th> 
+					</tr> 
+				</thead>
+				<tbody>
+		<?php
+		foreach ($lista as $producto)
+		{
 
-					if(count($subcategoria->productos)>0) //si tiene productos...
-					{
-						?>
-							<table class="table table-hover"> 
-								<thead style="background-color:grey"> 
-									<tr> 
-										<th>ID</th> 
-										<th>Nombre</th>
-										<th>Especificaciones</th>
-										<th>Descripción</th> 
-										<th>Precio</th>
-										<th>Subcategoría</th>
-										<th>Acciones</th> 
-									</tr> 
-								</thead>
-								<tbody>
-						<?php
-						foreach ($subcategoria->productos as $producto)
-						{ //aqui iremos añadiendo filas de productos
-							//echo "Producto " . $producto->nombre ;
-							?>
+				//echo "Producto " . $producto->nombre ;
+				?>
 
-							<!--AQUI IRA LA TABLA HTML-->
-							<tr> 
-								<th scope="row">
-									<span class="idprod"><?php echo $producto->id; ?></span>
-								</th> 
-								<td>
-									<label><?php echo $producto->nombre; ?></label>
-									<input placeholder="Nombre..." class="form-control" type="text" style="display:none" />
-								</td>  
-								<td>
-									<label><?php echo $producto->especificaciones; ?></label>
-									<input placeholder="Especificaciones..." class="form-control" type="text" style="display:none" />
-								</td>
-								<td>
-									<label><?php echo $producto->descripcion; ?></label>
-									<input placeholder="Descripción..." class="form-control" type="text" style="display:none" />
-								</td> 
-								<td>
-									<label><?php echo $producto->precio; ?></label>
-									<input placeholder="Precio..." class="form-control" type="text" style="display:none" />
-								</td>
-								<td>
-									<label><?php echo $subcategoria->nombre; ?></label>
-									<select style="display:none" class="form-control" id="subcatedit">
-									<?php
-										foreach ($lista_subcategorias as $categoriaselect)
+				<!--AQUI IRA LA TABLA HTML-->
+				<tr id="fila-editable"> 
+					<th scope="row">
+						<span class="idprod"><?php echo $producto->id; ?></span>
+					</th> 
+					<td>
+						<label><?php echo $producto->nombre; ?></label>
+						<input placeholder="Nombre..." class="form-control" type="text" style="display:none" />
+					</td>  
+					<td>
+						<label><?php echo $producto->especificaciones; ?></label>
+						<input placeholder="Especificaciones..." class="form-control" type="text" style="display:none" />
+					</td>
+					<td>
+						<label><?php echo $producto->descripcion; ?></label>
+						<input placeholder="Descripción..." class="form-control" type="text" style="display:none" />
+					</td> 
+					<td>
+						<label><?php echo $producto->precio; ?></label>
+						<input placeholder="Precio..." class="form-control" type="number" min="0" step="any" style="display:none" />
+					</td>
+					<td>
+
+							<?php
+								foreach ($lista_subcategorias as $categoria)
+								{
+									if(!empty($categoria->subcategorias))
+									{
+										foreach ($categoria->subcategorias as $subcategoria)
 										{
-											foreach ($categoriaselect->subcategorias as $subcategoriaselect)
+											if($subcategoria->id== $producto->subcategoriaId)
 											{
-												echo "<option value=" . $subcategoriaselect->id .  ">" . $subcategoriaselect->nombre . "</option>";
+												echo "<label>" . $subcategoria->nombre . "</label>";
+												break;
 											}
 										}
-									?>
-									</select>
-								</td>
-								<td>
-									<div class="btn-group">
-										<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
-										<a href='<?php echo $tiendaid; ?>/productos/<?php echo $producto->id; ?>' title="Administrar sus características" class="btn btn-info btn-caract"><span class="glyphicon glyphicon-eye-open"></span></a>
-										<a href='#' title="Editar producto" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
-										<a href='#' title="Borrar producto" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
-									</div>
-								</td>
-							</tr>
-						<?php
-						}
-						?></tbody> </table>
-						<?php
-					}
-				}
-			}
-		}
-	}
-	?>
-			<h2>Añadir nuevo producto para la tienda</h2>
-			<div class="container form-crear-prod"> 
-						<p>
-							Nombre:
-							<input placeholder="Nombre..." class="form-control" type="text" />
-						</p>
-						<p>
-							Especificaciones:
-							<input placeholder="Especificaciones..." class="form-control" type="text" />
-						</p>
-						<p>
-							Descripción:
-							<input placeholder="Descripción..." class="form-control" type="text"  />
-						</p>
-						<p>
-							Precio:
-							<input placeholder="Precio..." class="form-control" type="text" />
-						</p>
-
-						<p>
-							Categoría:
-							<select class="form-control" id="nuevocat">
-								<?php
-								if(!is_null($lista_subcategorias)) 
-								{ //si no es nula
-									echo "<option value='-1'>Selecciona una categoría...</option>";
-									foreach ($lista_subcategorias as $categoria) 
-									{
-										echo "<option value=" . $categoria->id . ">" . $categoria->nombre . "</option>";
 									}
 								}
-								else
+							?>
+
+						<select style="display:none" class="form-control" id="subcatedit">
+						<?php
+							foreach ($lista_subcategorias as $categoriaselect)
+							{
+								foreach ($categoriaselect->subcategorias as $subcategoriaselect)
 								{
-									echo "<option value=-1>No existe ninguna categoría...</option>";
+									echo "<option value=" . $subcategoriaselect->id .  ">" . $subcategoriaselect->nombre . "</option>";
 								}
+							}
+						?>
+						</select>
+						<span class="error" style="color:red;display:none">Campos obligatorios</span>
+					</td>
+
+					<td>
+						<div class="btn-group">
+							<a href='#' title="Guardar cambios" style="display:none" class="btn btn-success btn-guardar"><span class="glyphicon glyphicon-check"></span></a>
+							<a href='<?php echo $tiendaid; ?>/productos/<?php echo $producto->id; ?>' title="Administrar sus características" class="btn btn-info btn-caract"><span class="glyphicon glyphicon-eye-open"></span></a>
+							<a href='#' title="Editar producto" class="btn btn-warning btn-editar" data-estado="mostrando"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href='#' title="Borrar producto" class="btn btn-danger btn-borrar"><span class="glyphicon glyphicon-trash"></span></a>
+						</div>
+					</td>
+				</tr>
+			<?php
+		}
+		?>
+	</tbody> </table>
+	<?php	
+	}
+	?>
+			<div id="crear-prod">
+				<h2>Añadir nuevo producto para la tienda <span class="error" style="color:red;display:none">Campos obligatorios</span></h2>
+				<div class="container form-crear-prod">
+					<div class="row">
+						<div class="col-sm-2">
+							<input placeholder="Nombre..." class="form-control" type="text" />
+						</div>
+						<div class="col-sm-2">
+							<input placeholder="Especificaciones..." class="form-control" type="text" />
+						</div>
+						<div class="col-sm-2">
+							<input placeholder="Descripción..." class="form-control" type="text"  />
+						</div>
+						<div class="col-sm-2">
+							<input placeholder="Precio..." class="form-control" type="number" min="0" step="any" />
+						</div>
+
+						<div class="col-sm-2">
+							<select class="form-control" id="nuevosubcat">
+								<?php
+								echo "<option value='-1'>Selecciona...</option>";
+									foreach ($lista_subcategorias as $categoria)
+									{
+										foreach ($categoria->subcategorias as $subcategoria)
+										{
+											echo "<option value=" . $subcategoria->id . " data-catid=" . $subcategoria->categoriaId . ">" . $subcategoria->nombre . "</option>";
+										}
+									}
 								?>
 							</select>
+						</div>
 
-							<span style="display:none">
-								Subcategoría:
-								<select class="form-control" id="nuevosubcat">
-									<?php
-									echo "<option value='-1'>Selecciona una subcategoría...</option>";
-										foreach ($lista_subcategorias as $categoria)
-										{
-											foreach ($categoria->subcategorias as $subcategoria)
-											{
-												echo "<option style='display:none' value=" . $subcategoria->id . " data-catid=" . $subcategoria->categoriaId . ">" . $subcategoria->nombre . "</option>";
-											}
-										}
-									?>
-								</select>
-							</span>
-
-
-						</p>
-
-
-
-
-
-
-						<p>
-							<a href='#' title="Crear producto" class="btn btn-primary btn-success btn-crear">
+						<div class="col-sm-2">
+							<button title="Crear producto" class="btn btn-primary btn-success btn-crear">
 								<span class="glyphicon glyphicon-plus"></span>
-							</a>
-						</p>
-			</div> 
+							</button>
+						</div>
+					</div>
+				</div> 
+			</div>
 
 </main>
 
@@ -177,8 +151,6 @@
 
 
 <script>
-
-
 
  $('.btn-editar').click(function () {
 	var estado = $(this).attr("data-estado");
@@ -201,7 +173,10 @@
         		//selecciona por defecto la opcion que tenia en el label
         		$("select#subcatedit option").each(function() 
         		{
-        		 this.selected = (this.text == labels[i].innerHTML);
+        			if(this.text == labels[i].innerHTML)
+        			{
+        				this.selected=true;
+        			}
         		});
         	}
         	else
@@ -230,13 +205,16 @@ $('.btn-guardar').click(function () {
 	var inputs = dad.find(':input');
 	var id = dad.find('.idprod')[0].innerHTML;
 
+	$(".error").hide(); //escondemos errores
+
 	var datos = {}
 	datos.id = id;
 	for(var i=0;i<inputs.length;i++) 
 	{
     	var texto = inputs[i].value;
     	if(!texto) {
-    		return; //si hay un campo sin rellenar, no es valido
+    		$("#fila-editable").find(".error")[0].style.display="inline";
+			return;
     	}
     	if(i==0)
     		datos.nombre = texto;
@@ -267,36 +245,12 @@ $('.btn-guardar').click(function () {
 
 
 
-
-
-$('select#nuevocat').change(function() {
-      // var seleccionao = $("select option:selected").attr('value');
-      var catselecc = $(this).val();
-      if(catselecc!=-1) { //cargar las subcategorias
-      	//lo que habra que hacer es, que borre las subcategorias que no sean de esa cat
-
-      	//analiza cada opcion
-      	$("#nuevosubcat option").each(function()
-		{
-			$(this).hide();
-			var catid = $(this).attr("data-catid");
-			if(catid==catselecc || catid==undefined)
-				$(this).show();
-		});
-
-      	$("#nuevosubcat").parent().show();
-      }
-      else
-      {
-      	$("#nuevosubcat").parent().hide();
-      }
-
-
-});
-
 $(".btn-crear").click(function() {
 	var form = $(".form-crear-prod");
 	var inputs = form.find(":input");
+
+
+	$(".error").hide(); //escondemos errores
 
 	var valores_post = [];
 	for(var i = 0; i< inputs.length;i++) {
@@ -305,7 +259,7 @@ $(".btn-crear").click(function() {
 		{
 			if(input.value=="")
 			{
-				//console.log("ERROR INPUT VACIO");
+				$("#crear-prod").find(".error")[0].style.display="inline";
 				return;
 			}
 
@@ -314,7 +268,7 @@ $(".btn-crear").click(function() {
 		{
 			if(input.value=="-1")
 			{
-				//console.log("ERROR SELECT VACIO");
+				$("#crear-prod").find(".error")[0].style.display="inline";
 				return;
 			}
 		}
@@ -338,13 +292,17 @@ $(".btn-borrar").click(function() {
 	var padre = $(this).parent().parent().parent();
 	var idprod = padre.find(".idprod")[0].innerText;
 	//borrar un producto
-	$.ajax({
-		url : '<?php echo $tiendaid; ?>/borrarprod/' + idprod,
-		type : 'delete',
-		success:function (data) {
-			location.reload();
+	bootbox.confirm("¿Estás seguro? También se borrarán sus diferentes características.", function(seguro) {
+		if(seguro)
+		{
+			$.ajax({
+				url : '<?php echo $tiendaid; ?>/borrarprod/' + idprod,
+				type : 'delete',
+				success:function (data) {
+					location.reload();
+				}
+			});
 		}
 	});
 });
-
 </script>

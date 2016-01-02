@@ -45,7 +45,14 @@ $route['404_override'] = '';
 
 
 
+$route['login'] = 'login/index';
+$route['login/validar'] = 'login/iniciarsesion';
+$route['logout'] = 'login/cerrarsesion';
 
+
+
+
+//esto es, localhost/iw/admin
 $route['admin'] = "tienda/admin"; //pagina de administracion de tienda
 $route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
 $route['admin/tiendas/crear'] = 'tienda/nuevo';
@@ -57,7 +64,7 @@ $route['admin/tiendas/(:num)/borrarprod/(:num)'] = 'producto/borrar/$2';
 $route['admin/tiendas/(:num)/editarprod/(:num)'] = 'producto/editar/$2';
 
 
-$route['admin/tiendas/(:num)/productos/(:num)'] = 'caracteristica/index/$2'; //pagina de administracion de caracteristicas de producto
+$route['admin/tiendas/(:num)/productos/(:num)'] = 'caracteristica/index/$2/$1'; //pagina de administracion de caracteristicas de producto
 $route['admin/tiendas/(:num)/productos/(:num)/crearcaracteristica'] = 'caracteristica/nuevo/$2';
 $route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/borrar'] = 'caracteristica/borrar/$3';
 $route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/editar'] = 'caracteristica/editar/$3';
@@ -69,7 +76,6 @@ $route['admin/categorias/(:num)/borrar'] = 'categoria/borrar/$1'; //BORRAR
 $route['admin/categorias/(:num)/editar'] = 'categoria/editar/$1'; //EDITAR
 
 //administrar subcategorias de una categoria de tienda
-$route['admin/categorias/(:num)'] = "subcategoria/index/$1"; //PAGINA DE ADMINISTRACION DE SUBCATEGORIAS DE CAT
 $route['admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$1"; //CREAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$2"; //BORRAR SUBCATEGORIA
 $route['admin/categorias/(:num)/subcat/(:num)/editar'] = "subcategoria/editar/$2"; //EDITAR SUBCATEGORIA

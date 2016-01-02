@@ -4,7 +4,8 @@
 
 
 <main>
-	<h1><?php echo $titulo; ?></h1>
+	<a href="<?php echo base_url(); ?>admin/tiendas/<?php echo $idtienda; ?>" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
+	<h1><?php echo $titulo . " " . $nombreprod ?></h1>
 
 	
 
@@ -27,6 +28,7 @@
 				<tr> 
 					<th scope="row">
 						<span class="idcaracteristica"><?php echo $caracteristica->id; ?></span>
+						<span class="error" style="color:red;display:none">Campos obligatorios</span>	
 					</th> 
 					<td>
 						<label><?php echo $caracteristica->nombre; ?></label>
@@ -34,7 +36,7 @@
 					</td>  
 					<td>
 						<label><?php echo $caracteristica->stock; ?></label>
-						<input placeholder="Stock..." class="form-control" type="text" style="display:none" />
+						<input placeholder="Stock..." class="form-control" type="number" min="0" step="any" style="display:none" />
 					</td>
 
 					<td>
@@ -50,13 +52,13 @@
 			?>
 			<tr> 
 					<th scope="row">
-						
+						<span class="error" style="color:red;display:none">Campos obligatorios</span>
 					</th> 
 					<td>
 						<input placeholder="Nombre..." class="form-control" type="text" />
 					</td>  
 					<td>
-						<input placeholder="Stock..." class="form-control" type="text" />
+						<input placeholder="Stock..." class="form-control" type="number" min="0" step="any" />
 					</td>
 					<td>
 						<a id="btn-crear" href='#' title="Crear característica" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span></a>
@@ -83,13 +85,13 @@
 		</thead>
 		<tr> 
 					<th scope="row">
-						
+						<span class="error" style="color:red;display:none">Campos obligatorios</span>	
 					</th> 
 					<td>
 						<input placeholder="Nombre..." class="form-control" type="text" />
 					</td>  
 					<td>
-						<input placeholder="Stock..." class="form-control" type="text" />
+						<input placeholder="Stock..." class="form-control"  type="number" min="0" step="any" />
 					</td>
 					<td>
 						<a id="btn-crear" href='#' title="Crear característica" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span></a>
@@ -106,6 +108,7 @@
 $(document).ready(function () {
 	//crear caracteristica
 	$("#btn-crear").click(function(){
+		$(".error").hide(); //escondemos errores
 		var padre = $(this).parent().parent();
 		var inputs = padre.find(":input");
 
@@ -128,6 +131,10 @@ $(document).ready(function () {
 	        }
 			});
 
+		}
+		else
+		{
+			padre.find(".error")[0].style.display="inline";
 		}
 	});
 
@@ -179,6 +186,7 @@ $(document).ready(function () {
     });
 
 	$('.btn-guardar').click(function () {
+		$(".error").hide(); //escondemos errores
 		var dad = $(this).parent().parent().parent();
 		var inputs = dad.find(':input');
 		var id = dad.find('.idcaracteristica')[0].innerHTML;
@@ -190,6 +198,7 @@ $(document).ready(function () {
 		{
 	    	var texto = inputs[i].value;
 	    	if(!texto) {
+	    		dad.find(".error")[0].style.display="inline";
 	    		return; //si hay un campo sin rellenar, no es valido
 	    	}
 	    	if(i==0)
