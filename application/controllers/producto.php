@@ -11,8 +11,14 @@ class Producto extends MY_Controller {
 	{
 
    // $this->load->model("Categoria_m",'', TRUE);
-    $data['titulo']="Listado de productos de la tienda ";
+    $data['titulo']="Tienda ";
     $data['tiendaid']=$tiendaid;
+
+    $this->load->model("Tienda_m",'', TRUE);
+    $data['nombretienda']=$this->Tienda_m->getTienda($tiendaid)->nombre;
+    
+
+
 
     $this->load->model("Producto_m",'', TRUE);
 

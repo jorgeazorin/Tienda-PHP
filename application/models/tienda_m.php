@@ -14,6 +14,10 @@ class Tienda_m extends CI_Model {
   }
  }
 
+ function getTienda($idtienda) {
+  return $this->db->get_where('tienda',array('id' => $idtienda))->row();
+ }
+
   function crear($nombre,$localizacion,$fechaapertura,$infocontacto) {
     $data = array(
      'nombre' => $nombre,
