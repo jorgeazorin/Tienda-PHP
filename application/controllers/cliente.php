@@ -20,8 +20,34 @@ class Cliente extends CI_Controller {
             header("Location: /iw/index.php/cliente/login/");
         }
         $data['email']= $session_email;
+
+        $data['idusuario']=$session_id;
+
+        $this->load->model("direnvio_m",'', TRUE);
+
+        $direcciones = $this->direnvio_m->getDirecciones($session_id);
+        $data['direcciones']=$direcciones;
+
+
+
         $this->load->view('cliente/cliente.php', $data);
     }
+
+
+    public function borrarDireccion($idenvio)
+  {
+    $this->load->model("direnvio_m",'', TRUE);
+    $this->direnvio_m->borrar($idenvio);
+  }
+
+  public function crearDireccion($idusuario)
+  {
+    $this->load->model("direnvio_m",'', TRUE);
+    $datos = $_POST['datos'];
+
+    $this->direnvio_m->crear($datos,$idusuario);
+  }
+
 
     public function doRegistro(){
         $this->load->library('session');
