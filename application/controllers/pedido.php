@@ -14,10 +14,13 @@ class Pedido extends CI_Controller {
         $session_id = $this->session->userdata('id');
         $session_username = $this->session->userdata('userName');
         $session_email = $this->session->userdata('email');
-        $pedidos=$this->pedido_m->getPedidosCliente($session_id);
+        $pedido=$this->pedido_m->getPedido($pedidoId);
         $linped=$this->pedido_m->getlinped($pedidoId);
+        $data['direnvio']=$this->pedido_m->obtenerDirEnvio($pedido[0]->direnvioId);
+        
+        
         $data['pedidoId']=$pedidoId;
-        $data['pedido']=$pedidoId;
+        $data['pedido']=$pedido;
         $data['username']=$session_username;
         $data['email']= $session_email;
         $data['linped']= $linped;
@@ -34,5 +37,12 @@ class Pedido extends CI_Controller {
         $this->pedido_m->realizarPedidoCliente($cesta, $session_id);
         $carrito->destroy();
         header("Location: /iw/index.php/cliente/");
+    }
+    public function comentarlinped($pedidoId,$id){
+        $this->load->model("pedido_m",'', TRUE);
+        $comentario = $_POST['comentario'];
+        $this->pedido_m->comentarlinped($id,$comentario);
+                header("Location: /iw/index.php/pedido/verpedido/".$pedidoId);
+
     }
 }

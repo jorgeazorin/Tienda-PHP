@@ -8,7 +8,13 @@
     <div class="pedido">
         <br><br>
         <h4>Pedido <?php echo($pedidoId); ?></h4>
-        <br><br>
+        <p>Estado: <?php echo($pedido[0]->estado); ?> </p>
+        <p>Fecha: <?php echo($pedido[0]->fecha); ?> </p>
+        <p>Direccion de envio: <?php echo($direnvio[0]->direccion.', '. $direnvio[0]->codpostal.', '. $direnvio[0]->poblacion.', '. $direnvio[0]->provincia.', '. $direnvio[0]->pais.', '. $direnvio[0]->telefono   ); ?> </p>
+
+
+                <br><br>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -16,17 +22,30 @@
                     <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Precio total</th>
+                    <?php if($pedido[0]->estado=='entregado'){
+                        echo("<th>Comentario</th>");
+                    } ?>
                 </tr>
             </thead>
             <tbody>
                 <?php 
                 $total=0;
-                foreach($linped as $pedido){ ?>
+                foreach($linped as $linpedpedido){ ?>
                 <tr>
-                    <td> <div class="pro-img" style="background-image: url('/iw/public/img/<?php echo($pedido->productoId);?>.jpg');"></td>
-                    <td><?php echo($pedido->precio); ?>€</td>
-                    <td><?php echo($pedido->cantidad); $total+=($pedido->precio*$pedido->cantidad);?></td>
-                    <td><?php echo($pedido->precio*$pedido->cantidad);?>€</td>
+                    <td> <div class="pro-img" style="background-image: url('/iw/public/img/<?php echo($linpedpedido->productoId);?>.jpg');"></td>
+                    <td><?php echo($linpedpedido->precio); ?>€</td>
+                    <td><?php echo($linpedpedido->cantidad); $total+=($linpedpedido->precio*$linpedpedido->cantidad);?></td>
+                    <td><?php echo($linpedpedido->precio*$linpedpedido->cantidad);?>€</td>
+                    <?php if($pedido[0]->estado=='entregado'){
+                        echo('<td>
+                         <form method="post" action="/iw/index.php/pedido/comentarlinped/'.$pedidoId.'/'.$linpedpedido->id.'">
+                            <p>'.$linpedpedido->mensaje.'</p>
+                            <p><input type="text" name="comentario" value="" placeholder="Deja tu comentario de este artículo"></p>
+                            <input type="submit" name="commit" value="Comentar"></p>
+                          </form>
+                        </td>');
+                        
+                    } ?>
                 </tr>
                 <?php } ?>
                 
