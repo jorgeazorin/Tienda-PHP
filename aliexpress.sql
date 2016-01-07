@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2015 a las 16:58:47
+-- Tiempo de generación: 01-01-2016 a las 20:16:35
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caracteristicasprod` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `stock` int(11) NOT NULL,
   `productoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -43,6 +44,15 @@ CREATE TABLE `categoria` (
   `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(49, 'Perifericos'),
+(51, 'Otros'),
+(52, 'Consolas');
+
 -- --------------------------------------------------------
 
 --
@@ -55,6 +65,13 @@ CREATE TABLE `cliente` (
   `password` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `userName`, `password`, `email`) VALUES
+(1, 'paco', 'paco', 'paco@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -156,6 +173,13 @@ CREATE TABLE `subcategoria` (
   `categoriaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `subcategoria`
+--
+
+INSERT INTO `subcategoria` (`id`, `nombre`, `categoriaId`) VALUES
+(21, 'Ratones', 49);
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +188,7 @@ CREATE TABLE `subcategoria` (
 
 CREATE TABLE `tienda` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `localizacion` varchar(30) NOT NULL,
   `fechaapertura` date NOT NULL,
   `infocontacto` text NOT NULL
@@ -188,7 +213,8 @@ CREATE TABLE `tiendacliente` (
 -- Indices de la tabla `caracteristicasprod`
 --
 ALTER TABLE `caracteristicasprod`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `caractprod` (`productoId`);
 
 --
 -- Indices de la tabla `categoria`
@@ -205,46 +231,70 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indices de la tabla `clienteproducto`
+--
+ALTER TABLE `clienteproducto`
+  ADD KEY `fkprodclienteid` (`clienteId`),
+  ADD KEY `fkcliproductoid` (`productoId`);
+
+--
 -- Indices de la tabla `direnvio`
 --
 ALTER TABLE `direnvio`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `enviocli` (`clienteId`);
 
 --
 -- Indices de la tabla `linpedido`
 --
 ALTER TABLE `linpedido`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `linpedped` (`pedidoId`),
+  ADD KEY `linpedprod` (`productoId`);
 
 --
 -- Indices de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mensajecli` (`clienteId`),
+  ADD KEY `mensajetienda` (`tiendaId`);
 
 --
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidoenvio` (`direnvioId`),
+  ADD KEY `pedidocli` (`clienteId`);
 
 --
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `prodtienda` (`tiendaId`),
+  ADD KEY `prodsubcat` (`subcategoriaId`);
 
 --
 -- Indices de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subcattienecat` (`categoriaId`);
 
 --
 -- Indices de la tabla `tienda`
 --
 ALTER TABLE `tienda`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tiendacliente`
+--
+ALTER TABLE `tiendacliente`
+  ADD KEY `fktiendaclienteid` (`clienteId`),
+  ADD KEY `fkclientetiendaid` (`tiendaId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -259,12 +309,12 @@ ALTER TABLE `caracteristicasprod`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `direnvio`
 --
@@ -294,12 +344,76 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `tienda`
 --
 ALTER TABLE `tienda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `caracteristicasprod`
+--
+ALTER TABLE `caracteristicasprod`
+  ADD CONSTRAINT `caractprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `clienteproducto`
+--
+ALTER TABLE `clienteproducto`
+  ADD CONSTRAINT `fkcliproductoid` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`),
+  ADD CONSTRAINT `fkprodclienteid` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
+--
+-- Filtros para la tabla `direnvio`
+--
+ALTER TABLE `direnvio`
+  ADD CONSTRAINT `enviocli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
+--
+-- Filtros para la tabla `linpedido`
+--
+ALTER TABLE `linpedido`
+  ADD CONSTRAINT `linpedped` FOREIGN KEY (`pedidoId`) REFERENCES `pedido` (`id`),
+  ADD CONSTRAINT `linpedprod` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`);
+
+--
+-- Filtros para la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  ADD CONSTRAINT `mensajecli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `mensajetienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`);
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedidocli` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `pedidoenvio` FOREIGN KEY (`direnvioId`) REFERENCES `direnvio` (`id`);
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `prodsubcat` FOREIGN KEY (`subcategoriaId`) REFERENCES `subcategoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prodtienda` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `subcattienecat` FOREIGN KEY (`categoriaId`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tiendacliente`
+--
+ALTER TABLE `tiendacliente`
+  ADD CONSTRAINT `fkclientetiendaid` FOREIGN KEY (`tiendaId`) REFERENCES `tienda` (`id`),
+  ADD CONSTRAINT `fktiendaclienteid` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -42,5 +42,40 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */
+
+
+
+$route['login'] = 'login/index';
+$route['login/validar'] = 'login/iniciarsesion';
+$route['logout'] = 'login/cerrarsesion';
+
+
+
+
+//esto es, localhost/iw/admin
+$route['admin'] = "tienda/admin"; //pagina de administracion de tienda
+$route['admin/tiendas/(:num)/editar'] = 'tienda/editar';
+$route['admin/tiendas/crear'] = 'tienda/nuevo';
+$route['admin/tiendas/(:num)/borrar'] = 'tienda/borrar/$1';
+
+$route['admin/tiendas/(:num)'] = 'producto/index/$1';
+$route['admin/tiendas/(:num)/crearprod'] = 'producto/nuevo/$1';
+$route['admin/tiendas/(:num)/borrarprod/(:num)'] = 'producto/borrar/$2';
+$route['admin/tiendas/(:num)/editarprod/(:num)'] = 'producto/editar/$2';
+
+
+$route['admin/tiendas/(:num)/productos/(:num)'] = 'caracteristica/index/$2/$1'; //pagina de administracion de caracteristicas de producto
+$route['admin/tiendas/(:num)/productos/(:num)/crearcaracteristica'] = 'caracteristica/nuevo/$2';
+$route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/borrar'] = 'caracteristica/borrar/$3';
+$route['admin/tiendas/(:num)/productos/(:num)/caracteristica/(:num)/editar'] = 'caracteristica/editar/$3';
+
+
+$route['admin/categorias'] = "categoria/index"; //PAGINA DE ADMINISTRACION DE CATEGORIAS DE TIENDA
+$route['admin/categorias/crear'] = 'categoria/nuevo'; //CREAR
+$route['admin/categorias/(:num)/borrar'] = 'categoria/borrar/$1'; //BORRAR
+$route['admin/categorias/(:num)/editar'] = 'categoria/editar/$1'; //EDITAR
+
+//administrar subcategorias de una categoria de tienda
+$route['admin/categorias/(:num)/crearsubcat'] = "subcategoria/nuevo/$1"; //CREAR SUBCATEGORIA
+$route['admin/categorias/(:num)/subcat/(:num)/borrar'] = "subcategoria/borrar/$2"; //BORRAR SUBCATEGORIA
+$route['admin/categorias/(:num)/subcat/(:num)/editar'] = "subcategoria/editar/$2"; //EDITAR SUBCATEGORIA
