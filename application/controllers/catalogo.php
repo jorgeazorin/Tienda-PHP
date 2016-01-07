@@ -31,8 +31,15 @@ class Catalogo extends CI_Controller {
         $producto=$this->catalogo_m->get_producto($id);
         $data['producto']=$producto;
         
+        
+        $comentarios=$this->catalogo_m->get_producto_comentarios($id);
+        $data['comentarios']=$comentarios;
+        
         $this->load->model("tienda_m",'', TRUE);
         $data['tienda']=$this->tienda_m-> getTienda($producto[0]->tiendaId);
         $this->load->view('catalogo/producto.php', $data);
+        
+        
+        
     }
 }

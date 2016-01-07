@@ -15,6 +15,13 @@ class Catalogo_m extends CI_Model{
       return $query->result();
     }
     
+    function get_producto_comentarios($id){
+      $query = $this->db->query('
+      SELECT `mensaje`, `productoId`, `userName`, `pedido`.`fecha` FROM `linpedido`, `cliente`, `pedido` 
+      WHERE `productoId`='.$id.' AND `cliente`.`id`=`pedido`.`clienteId` AND `pedido`.`id`=`linpedido`.`pedidoId`');
+      return $query->result();
+    }
+    
     
   /*  $this->db->count_all("agenda");
     return $this->db->get("agenda")->result();*/

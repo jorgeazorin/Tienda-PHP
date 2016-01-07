@@ -55,6 +55,13 @@
                <?php echo($producto[0]->descripcion); ?>
             </div>
         </div>
+    <br><br><br>
+        <div class="comentarios">
+            <h3>Comentarios de gente que ya lo ha recibido</h3>
+            <?php foreach ($comentarios as $comentario) { if( strlen ($comentario->mensaje)>0){ ?>
+            <p><span><?php echo($comentario->fecha); ?></span> <strong><?php echo($comentario->userName); ?> </strong> <?php echo($comentario->mensaje); ?></p>
+            <?php }} ?>
+        </div>
     </main>
 
 
@@ -65,6 +72,9 @@
             float: left;
             width: 74%;
             margin: 0;
+        }
+        .producto{
+            overflow: hidden;
         }
         
         .product-info-current {
@@ -110,6 +120,9 @@
         .current-price b {
             font-size: 22px;
         }
+        .comentarios {
+    clear: both;
+}
         
         .ui-cost b {
             color: #F60;
