@@ -7,7 +7,12 @@
 
     <main>
         <h3>Catálogo de la tienda <?php echo($tienda->id) ?></h3>
+        <p><strong>Localización </strong> <?php echo($tienda->localizacion) ?></p>
+        <p><strong>Información de contacto </strong> <?php echo($tienda->infocontacto) ?></p>
+        <p><strong>Fecha de apertura: </strong> <?php echo($tienda->fechaapertura) ?></p>
+        <br><br>
             <div class="catalogo">
+                <h4>Productos</h4>
 <?php
         foreach ($TodoElCatalogo as $row){
   ?>
