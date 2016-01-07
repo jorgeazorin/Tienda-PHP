@@ -1,0 +1,45 @@
+.logo_img {
+        width: 315px;
+    height: 86px;
+    float: left;
+    margin: 2%;
+    margin-bottom: 0;
+    margin-left: 2%;
+    background: url('http://docs.alibabagroup.com/assets2/images/en/news/library_logos_aliExpress_large.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+
+.menu {
+    float: right;
+}
+
+main {
+    background-color: #eee;
+    padding: 3%;
+    padding-top: 10px;
+}
+.titulocabecera {
+    overflow: hidden;
+    padding-bottom: 32px;
+    border-bottom: solid 2px #D8D8D8;
+}
+
+.cabecera .glyphicon {
+    padding-right: 6px;
+}
+.cabecera a {
+    color: #4A4A4A;
+    font-size: 15px;
+}
+
+.cabecera li {
+    display: inline-block;
+    font-size: large;
+    margin-top: 15px;
+    margin-right: 31px;
+    color: #791A13;
+}

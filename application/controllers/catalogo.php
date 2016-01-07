@@ -8,7 +8,7 @@ class Catalogo extends CI_Controller {
   }
 
   public function index(){
-
+      $this->load->library('session');
         $this->load->model("catalogo_m",'', TRUE);
         $data['TodoElCatalogo']=$this->catalogo_m->get_all();
         $this->load->view('catalogo/todo_catalogo.php', $data);
@@ -17,6 +17,7 @@ class Catalogo extends CI_Controller {
     
     
     public function producto( $id){
+        $this->load->library('session');
         $this->load->model("catalogo_m",'', TRUE);
         $data['producto']=$this->catalogo_m->get_producto($id);
         $this->load->view('catalogo/producto.php', $data);
