@@ -13,13 +13,26 @@ class Catalogo extends CI_Controller {
         $data['TodoElCatalogo']=$this->catalogo_m->get_all();
         $this->load->view('catalogo/todo_catalogo.php', $data);
   }
-  
+  public function tienda($id){
+      $this->load->library('session');
+        $this->load->model("catalogo_m",'', TRUE);
+        $data['TodoElCatalogo']=$this->catalogo_m->get_catalogo_tienda($id);
+      
+      
+       $this->load->model("tienda_m",'', TRUE);
+        $data['tienda']=$this->tienda_m-> getTienda($id);
+        $this->load->view('catalogo/catalogo_tienda.php', $data);
+  }
     
     
     public function producto( $id){
         $this->load->library('session');
         $this->load->model("catalogo_m",'', TRUE);
-        $data['producto']=$this->catalogo_m->get_producto($id);
+        $producto=$this->catalogo_m->get_producto($id);
+        $data['producto']=$producto;
+        
+        $this->load->model("tienda_m",'', TRUE);
+        $data['tienda']=$this->tienda_m-> getTienda($producto[0]->tiendaId);
         $this->load->view('catalogo/producto.php', $data);
     }
 }

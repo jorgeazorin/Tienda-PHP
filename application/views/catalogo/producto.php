@@ -38,40 +38,21 @@
                     <div class="seller-info">
                         <div class="seller">
                             <div class="title">Vendido por</div>
+     <a class="store-lnk" target="_blank" href="/iw/catalogo/tienda/<?php echo($tienda->id); ?>" title="NO.1 Kitchen Supply  Mall">Tienda <?php echo($tienda->id); ?></a>
                             <div class="company-name notranslate">
-                                <input type="hidden" id="hid_storeId" value="414474">
-
-                                <a class="store-lnk" target="_blank" href="http://www.aliexpress.com/store/414474" title="NO.1 Kitchen Supply  Mall">NO.1 Kitchen Supply  Mall</a>
                             </div>
-                            <address>
- China (Mainland) (Zhejiang)  </address>
-                            <input type="hidden" id="hid-feedback-url" value="http://www.aliexpress.com/store/feedback-score/414474.html">
+                            <address><?php echo($tienda->localizacion); ?> </address>
                             <div class="seller-score">
-                                <a class="seller-score-lnk" rel="nofollow" title="Feedback Score 5379">
-                                    <b>5379</b>
-                                </a>
-                                <a class="seller-level-lnk" rel="nofollow">
-                                    <img alt="" src="http://i00.i.aliimg.com/wimg/feedback/icon/24-s.gif" title="This is the Feedback Symbol for Feedback Scores from 5000-9999.">
-                                </a>
+                                <?php echo($tienda->infocontacto); ?>
+                                <?php echo($tienda->infocontacto); ?>
                             </div>
-                            <div class="seller-feedback">
-                                <a class="feedback-rate" rel="nofollow">
-                                    <b>97.4%</b>
-                                </a> Valoraciones positivas
-                            </div>
-
-
-
-                        </div>
+                       </div>
                     </div>
                 </div>
             </div>
             
             <div class="producto_descripcion">
-               La ventana de instrucciones almacena las instrucciones pendientes ya decodificadas y se utiliza un bit para indicar si esa instrucción está disponible. Po su naturaleza, la emisión de las instrucciones depende del alineamiento y del orden:
-La emisión es alineada si no pueden introducirse nuevas instrucciones en la ventana de instrucciones hasta que ésta no esté totalmente vacía. En la emisión no alineada, mientras que exista espacio en la ventana, se pueden ir introduciendo instrucciones para ser emitidas.
-En la emisión ordenada se respeta el orden en que las instrucciones se han ido introduciendo en la ventana de instrucciones; si una instrucción incluida en la ventana de instrucciones no puede emitirse, las instrucciones que la siguen tampoco podrán emitirse, aunque tengan sus operandos y la unidad que necesitan esté disponible. En cambio, en la emisión desordenada no existe este bloqueo, ya que pueden emitirse todas las instrucciones que dispongan de sus operandos y de la correspondiente unidad funcional.
-               
+               <?php echo($producto[0]->descripcion); ?>
             </div>
         </div>
     </main>

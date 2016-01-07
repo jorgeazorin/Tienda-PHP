@@ -9,6 +9,13 @@ class Catalogo_m extends CI_Model{
       $query = $this->db->query('SELECT `id`, `nombre`, `especificaciones`, `descripcion`, `precio`, `tiendaId`, `subcategoriaId`, `precio_sin_descuento` FROM `producto` WHERE `id` = '. $id);
       return $query->result();
   }
+    
+    function get_catalogo_tienda($id){
+      $query = $this->db->query('SELECT `id`, `nombre`, `especificaciones`, `descripcion`, `precio`, `tiendaId`, `subcategoriaId`, `precio_sin_descuento` FROM `producto` WHERE `tiendaId` = '.$id);
+      return $query->result();
+    }
+    
+    
   /*  $this->db->count_all("agenda");
     return $this->db->get("agenda")->result();*/
   }
