@@ -31,7 +31,30 @@
             </tbody>
         </table>
     </div>
-
+    <div class="mensajes">
+    <br><br>
+        <h4>Mensajes</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                
+                <th>Tienda</th>
+                <th>Mensaje</th>
+                <th></th>
+                    </tr>
+            </thead>
+            <tbody>
+                 <?php 
+                foreach($mensajes as $mensaje){ ?>
+                <tr>
+                    <td><a href="/iw/index.php/catalogo/tienda/<?php echo($mensaje->tiendaId); ?>"><?php echo($mensaje->nombre); ?></a></td>
+                    <td><?php echo($mensaje->texto); ?></td>
+                    <td><a href="/iw/index.php/mensaje/eliminar/<?php echo($mensaje->id); ?>">Eliminar</a></td>
+                </tr>
+                <?php }?>
+            </tbody>
+        </table>
+    </div>
     <div class="direcciones">
          <br><br>
         <h4>Direcciones de entrega</h4>

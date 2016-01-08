@@ -27,8 +27,10 @@ class Cliente extends CI_Controller {
 
         $direcciones = $this->direnvio_m->getDirecciones($session_id);
         $data['direcciones']=$direcciones;
-
-
+        
+        $this->load->model("mensaje_m",'', TRUE);
+         $mensajes = $this->mensaje_m->getmensajesCliente($session_id);
+        $data['mensajes']=$mensajes;
 
         $this->load->view('cliente/cliente.php', $data);
     }

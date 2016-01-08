@@ -35,7 +35,7 @@ class Catalogo_m extends CI_Model{
       $query = $this->db->query("SELECT `id`, `nombre`, `categoriaId` FROM `subcategoria` WHERE `id` =" .$id);
       return $query->result();
     }
-    
+    //SELECT `producto`.`id`, `nombre`, `especificaciones`, `descripcion`, `producto`.`precio`, `tiendaId`, `subcategoriaId`, `precio_sin_descuento`, COUNT(`linpedido`.`productoId`) as 'numvendidos' FROM `producto`,  `linpedido` WHERE `linpedido`.`productoId`=`producto`.`id`
     
     
   /*  $this->db->count_all("agenda");

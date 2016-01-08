@@ -38,13 +38,21 @@
                 <div class="seller-info-wrap">
                     <div class="seller-info">
                         <div class="seller">
-                            <div class="title">Vendido por</div>
-     <a class="store-lnk" target="_blank" href="/iw/catalogo/tienda/<?php echo($tienda->id); ?>" title="">Tienda <?php echo($tienda->nombre); ?></a>
+                            <div class="title">     <a class="store-lnk" target="_blank" href="/iw/catalogo/tienda/<?php echo($tienda->id); ?>" title="">Tienda <?php echo($tienda->nombre); ?></a>
+</div>
                             <div class="company-name notranslate">
                             </div>
                             <address><?php echo($tienda->localizacion); ?> </address>
                             <div class="seller-score">
                                 <?php echo($tienda->infocontacto); ?>
+                            </div>
+                            <br><br>
+                            <div class="mensajeAtienda">
+                                <p>Envíar mensaje sobre el producto a la tienda</p>
+                                <form method="post" action="/iw/index.php/mensaje/enviaratienda/<?php echo($tienda->id); ?>/<?php echo($producto[0]->id); ?>">
+                                <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                    <button type="submit" class="btn btn-success" value="">Enviar</button>
+                                </form>
                             </div>
                        </div>
                     </div>
@@ -154,7 +162,27 @@
     font-size: x-small;
     color: #757575 !important;
 }
+        .mensajeAtienda {
+    margin: -15px;
+    padding: 15px;
+    background: #FDFDFD;
+    border-top: solid 1px #C9C9C9;
+}
         
+        .mensajeAtienda p {
+    font-size: small;
+    font-weight: 600;
+    color: #636262;
+}
+        
+        .mensajeAtienda textarea {
+    overflow: auto;
+    vertical-align: top;
+    max-width: 199px;
+    min-height: 64px;
+    margin-bottom: 6px !important;
+    min-width: 199px;
+}
         main {
         }
     </style>
