@@ -14,13 +14,10 @@
 </ul>
 </div>
     <main>
-        <h3>Catálogo de la tienda <?php echo($tienda->nombre) ?></h3>
-        <p><strong>Localización </strong> <?php echo($tienda->localizacion) ?></p>
-        <p><strong>Información de contacto </strong> <?php echo($tienda->infocontacto) ?></p>
-        <p><strong>Fecha de apertura: </strong> <?php echo($tienda->fechaapertura) ?></p>
-        <br><br>
+        <h2>Catálogo</h2>
+        <h5>Subcategoría: <?php echo $categoria->nombre;?> </h5>
             <div class="catalogo">
-                <h4>Productos</h4>
+                
 <?php
         foreach ($TodoElCatalogo as $row){
   ?>
@@ -31,6 +28,7 @@
                         <div class="pro-info">
                             <div class="g-orders"> 284 vendidos</div>
                             <span class="g-price">US $<?php echo $row->precio;?></span>
+                            <span class="g-orders categoria"><?php echo $row->catnombre;?></span>
                         </div>
                     </a>
                 </div>

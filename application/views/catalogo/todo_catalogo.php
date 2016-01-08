@@ -4,7 +4,15 @@
 ?>
 
         <link rel="stylesheet" href="/iw/public/css/todo_catalogo.css">
+<div class="subcategorias">
+<ul>
+    <?php foreach($categorias as $subcategoria){
+            echo('<li><a href="/iw/index.php/catalogo/categoria/'.$subcategoria->id.'">'.$subcategoria->nombre.'</a></li>');
+        }
+    ?>
 
+</ul>
+</div>
     <main>
         <h2>Catálogo</h2>
             <div class="catalogo">
@@ -18,7 +26,7 @@
                         <div class="pro-info">
                             <div class="g-orders"> 284 vendidos</div>
                             <span class="g-price">US $<?php echo $row->precio;?></span>
-                                <del class="g-del-price">  <?php if($row->precio_sin_descuento!=0){ echo ("US $"); echo $row->precio_sin_descuento; }?></del>
+                            <span class="g-orders categoria"><?php echo $row->catnombre;?></span>
                         </div>
                     </a>
                 </div>

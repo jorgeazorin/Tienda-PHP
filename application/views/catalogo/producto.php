@@ -13,7 +13,9 @@
             </div>
 
             <div class="producto_descripcion">
-                <h1><?php echo $producto[0]->nombre;?></h1>
+                <h1><?php echo $producto[0]->nombre;?>
+                <a href="/iw/catalogo/categoria/<?php echo $producto[0]->subcategoriaId;?>"> - <?php echo $producto[0]->catnombre;?></a>
+                    </h1>
                 <div class="precio product-info">
                     <dl class="product-info-current">
                         <dt>Precio:</dt>
@@ -33,7 +35,6 @@
                 </div>
 
 
-
                 <div class="seller-info-wrap">
                     <div class="seller-info">
                         <div class="seller">
@@ -44,16 +45,17 @@
                             <address><?php echo($tienda->localizacion); ?> </address>
                             <div class="seller-score">
                                 <?php echo($tienda->infocontacto); ?>
-                                <?php echo($tienda->infocontacto); ?>
                             </div>
                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="producto_descripcion">
+                <div class="precio product-info">
                <?php echo($producto[0]->descripcion); ?>
             </div>
+<br>
+            </div>
+            
+            
         </div>
     <br><br><br>
         <div class="comentarios">
@@ -91,8 +93,7 @@
         }
         
         .producto_descripcion {
-            margin-left: 355px;
-            min-width: 450px;
+
             overflow: hidden;
         }
         
@@ -149,6 +150,10 @@
             font-family: 'Open Sans', Arial, Helvetica, sans-senif, SimSun, 宋体;
             margin: 0;
         }
+        .producto_descripcion h1 a {
+    font-size: x-small;
+    color: #757575 !important;
+}
         
         main {
         }
