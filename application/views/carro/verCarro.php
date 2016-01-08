@@ -3,7 +3,12 @@
   // $this->load->view('inc/categorias');
 ?>
 <main>
-
+<form method="post" action="/iw/index.php/pedido/realizarpedido/">
+    <?php 
+      if(strlen($errorenvio)>1){
+                  echo('<div class="alert alert-danger" role="alert"> <strong>Oh no!</strong> Añada una dirección de envío. </div>');
+      }
+      ?>
 <div class="carroCompra">
     <h3>Carrito de la compra</h3>
     <br>
@@ -34,7 +39,7 @@
             <td><a href="/iw/index.php/carro/delete/<?php echo $row["unique_id"];?>">Eliminar</a></td>
         </tr>
 <?php
-        }}
+        }
 ?>
         
         </tbody>
@@ -46,7 +51,9 @@
     
     
     
-    
+    <?php
+                if($this->session->userdata('userName')){
+                ?>
      <div class="direcciones">
          <br><br>
         <h4>Direcciones de entrega</h4>
@@ -61,12 +68,23 @@
             ?>
 <div class="radio">
   <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="<?php echo ($direccion->id) ;?>" checked>
+    <input type="radio" name="direccion" id="optionsRadios1" value="<?php echo ($direccion->id) ;?>" checked>
     <?php echo ($direccion->direccion.', '.$direccion->poblacion.', '.$direccion->provincia.', '.$direccion->codpostal.', '.$direccion->pais.', '.$direccion->telefono); ?>
   </label>
 </div>
             <?php
         } ?>
+         
+         <?php
+            
+        if(!is_null($direcciones)){
+
+            ?>
+    <div class="botones">
+        <input type="submit" name="commit" value="Realizar pedido">
+    </div>
+</div>
+<?php } ?>
          <br><br>
          <h5>Añadir nueva dirección</h5>
          <div class="panel panel-default panel-crear">
@@ -99,16 +117,18 @@
     
     
     
+    <?php }
+        
+        else{
+                  echo('<br><div class="alert alert-warning" role="alert"> <strong></strong> Debes logearte para continuar la compra. </div>');
+        }} ?>
     
     
     
     
-    <div class="botones">
-        <a href="/iw/index.php/pedido/realizarpedido/">Realizar pedido</a>
-    </div>
-</div>
-
-    <style>
+    </form>
+    </main>
+<style>
     a{
       text-decoration: none !important;
     }
@@ -209,8 +229,6 @@ box-shadow: 0 3px 6px 0 rgba(51,51,51,.298039)
     box-shadow: inset 0px 5px 17px -7px;
 }
 </style>
-    </main>
-
 <script>
     $(document).ready(function () {
     

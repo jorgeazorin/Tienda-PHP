@@ -7,12 +7,13 @@ class Carro extends CI_Controller {
     $this->load->database();
   }
 
-  public function index(){
+  public function index($errorenvio=""){
       $this->load->library('session');
       $this->load->library('Carrito');
       $carrito = new Carrito();
       $session_username = $this->session->userdata('userName');
       $data['username']=$session_username;
+      $data['errorenvio']=$errorenvio;
       $this->load->model("direnvio_m",'', TRUE);
       $session_id = $this->session->userdata('id');
         $data['idusuario']=$session_id;

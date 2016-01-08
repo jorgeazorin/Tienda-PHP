@@ -10,9 +10,9 @@ class Pedido_m extends CI_Model{
       $query = $this->db->query("SELECT `id`, `estado`, `total`, `fecha`, `direnvioId`, `clienteId` FROM `pedido` WHERE `id` = ".$id);
       return $query->result();
   }
-    function realizarPedidoCliente( $cesta, $cliente){
+    function realizarPedidoCliente( $cesta, $cliente, $direnvio){
         if($cesta) {  
-            $query = $this->db->query(" INSERT INTO `pedido` (`id`, `estado`,`fecha`,  `clienteId`) VALUES (NULL, 'Sin procesar',CURRENT_DATE,   '.$cliente.');");
+            $query = $this->db->query(" INSERT INTO `pedido` (`id`, `estado`,`fecha`,  `clienteId`, `direnvioId`) VALUES (NULL, 'Sin procesar',CURRENT_DATE,'.$cliente.','.$direnvio.');");
             $pedidoId= $this->db->insert_id();
             foreach ($cesta as $row){
                 $query = $this->db->query("INSERT INTO `linpedido` (`id`, `cantidad`, `precio`, `pedidoId`, `valoracion`, `mensaje`, `productoId`) VALUES (NULL, '".$row["cantidad"]."', '".$row["precio"]."', '".$pedidoId."', '', '', '".$row["id"]."');");

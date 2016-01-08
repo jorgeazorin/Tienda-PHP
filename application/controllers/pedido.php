@@ -28,15 +28,21 @@ class Pedido extends CI_Controller {
   }
   
     public function realizarpedido(){
-        $this->load->library('session');
-        $this->load->model("pedido_m",'', TRUE);
-        $session_id = $this->session->userdata('id');
-        $this->load->library('Carrito');
-        $carrito = new Carrito();
-        $cesta = $carrito->get_content();
-        $this->pedido_m->realizarPedidoCliente($cesta, $session_id);
-        $carrito->destroy();
-        header("Location: /iw/index.php/cliente/");
+        $direnvio=$_POST['direccion'];
+        if($direnvio){
+            $this->load->library('session');
+            $this->load->model("pedido_m",'', TRUE);
+            $session_id = $this->session->userdata('id');
+            $this->load->library('Carrito');
+            $carrito = new Carrito();
+            $cesta = $carrito->get_content();
+            $this->pedido_m->realizarPedidoCliente($cesta, $session_id, $direnvio);
+            $carrito->destroy();
+            header("Location: /iw/index.php/cliente/");
+        }else{
+            header("Location: /iw/index.php/carro/errorenvio");
+        }
+        
     }
     public function comentarlinped($pedidoId,$id){
         $this->load->model("pedido_m",'', TRUE);
