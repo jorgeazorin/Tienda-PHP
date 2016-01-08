@@ -53,6 +53,7 @@ $route['logout'] = 'login/cerrarsesion';
 $route['cliente'] = 'cliente/index';
 $route['cliente/direcciones/(:num)/borrar'] = "cliente/borrarDireccion/$1";
 $route['cliente/(:num)/direcciones/crear'] = "cliente/crearDireccion/$1";
+$route['cliente/(:num)/direcciones/(:num)/modificar'] = 'cliente/modificarDireccion/$2/$1';
 
 
 

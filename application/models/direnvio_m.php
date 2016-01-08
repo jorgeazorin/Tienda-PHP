@@ -32,5 +32,19 @@ class Direnvio_m extends CI_Model {
     $this->db->insert('direnvio', $data);
   }
 
+  function actualizar($id,$direccion,$poblacion,$provincia,$codpostal,$pais,$telefono,$clienteId) {
+    $data = array(
+     'direccion' => $direccion,
+     'poblacion' => $poblacion,
+     'provincia' => $provincia,
+     'codpostal' => $codpostal,
+     'pais' => $pais,
+     'telefono' => $telefono,
+     'clienteId' => $clienteId
+    );
+    $this->db->where('id', $id);
+    $this->db->update('direnvio', $data);
+ }
+
 
 }

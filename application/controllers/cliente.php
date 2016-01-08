@@ -48,6 +48,24 @@ class Cliente extends CI_Controller {
     $this->direnvio_m->crear($datos,$idusuario);
   }
 
+  public function modificarDireccion($idenvio,$idusuario)
+  {
+    $this->load->model("direnvio_m",'', TRUE);
+    $datos = $_POST['datos'];
+
+    $id = $idenvio;
+    $direccion = $datos[0];
+    $poblacion = $datos[1];
+    $provincia = $datos[2];
+    $codpostal = $datos[3];
+    $pais = $datos[4];
+    $telefono = $datos[5];
+    $clienteId = $idusuario;
+
+    $this->direnvio_m->actualizar($id,$direccion,$poblacion,$provincia,$codpostal,$pais,$telefono,$clienteId);
+
+  }
+
 
     public function doRegistro(){
         $this->load->library('session');

@@ -70,27 +70,38 @@
 
             ?>
 
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-editar">
               <!-- Default panel contents -->
               <div class="panel-heading"><i class="glyphicon glyphicon-user"></i> <?php echo($username);?></div>
+              <span class="error" style="color:red;display:none">Campos obligatorios</span>
               <div class="panel-body">
                 <div class="container">
                     <div class="row">
-                        <i class="glyphicon glyphicon-map-marker"></i><?php echo $direccion->direccion; ?>
+                        <i class="glyphicon glyphicon-map-marker"></i> 
+                        <label><?php echo $direccion->direccion; ?></label>
+                        <input placeholder="Dirección..." class="form-control" type="text" style="display:none"/>
                     </div>
                     <div class="row">
-                        <?php echo $direccion->poblacion; ?>
-                        <?php echo $direccion->provincia; ?>
-                        <?php echo $direccion->codpostal; ?>
+                        <label><?php echo $direccion->poblacion; ?></label>
+                        <input placeholder="Población..." class="form-control" type="text" style="display:none" />
+                        <label><?php echo $direccion->provincia; ?></label>
+                        <input placeholder="Provincia..." class="form-control" type="text" style="display:none"/>
+                        <label><?php echo $direccion->codpostal; ?></label>
+                        <input placeholder="Código postal..." class="form-control" type="number" min="0" step="any" style="display:none"/>
                     </div>
                     <div class="row">
-                        <?php echo $direccion->pais; ?>
+                        <label><?php echo $direccion->pais; ?></label>
+                        <input placeholder="País..." class="form-control" type="text" style="display:none"/>
                     </div>
                     <div class="row">
-                        <i class="glyphicon glyphicon-earphone"></i><?php echo $direccion->telefono; ?>
+                        <i class="glyphicon glyphicon-earphone"></i>
+                        <label><?php echo $direccion->telefono; ?></label>
+                        <input placeholder="Teléfono..." class="form-control" type="number" min="0" step="any" style="display:none"/>
                     </div>
                     <div class="row">
-                        <a href="#">Modificar</a>|<a class="btn-borrar" data-idborrar="<?php echo $direccion->id; ?>" href="#">Eliminar</a>
+                        <button data-idenvio="<?php echo $direccion->id; ?>" class="btn btn-warning btn-guardarcambios" style="display:none">Guardar</button>
+                        <button type="button" class="btn btn-link btn-editar">Modificar</button>|
+                        <button type="button" data-idborrar="<?php echo $direccion->id; ?>" class="btn btn-link btn-borrar">Eliminar</button>
                     </div>
                 </div>
               </div>
@@ -113,6 +124,56 @@ $(document).ready(function () {
         $.ajax({
             url : 'cliente/direcciones/' + id + '/borrar',
             type : 'delete',
+            success:function (data) {
+                location.reload();
+            }
+        });
+    });
+
+    $('.btn-editar').click(function() {
+        var labels = $(".panel-editar").find("label");
+        var inputs = $(".panel-editar").find(":input");
+        if( labels.is(":visible"))
+        {
+            inputs.show();
+            labels.hide();
+            for(var i=0;i<labels.length;i++) 
+            {
+                inputs[i].value = labels[i].innerHTML;
+            }
+        }
+        else
+        {
+            inputs.hide();
+            labels.show();
+        }
+        $(".btn-borrar").show();
+        $(".btn-editar").show();
+
+    })
+
+    $(".btn-guardarcambios").click(function() {
+        var valores_post = [];
+        var inputs = $(".panel-editar").find(":input");
+        for(var i = 0; i<inputs.length;i++) {
+            if(inputs[i].value=="" && inputs[i].nodeName!="BUTTON")
+            {
+                //error
+                $(".panel-editar").find(".error")[0].style.display="inline";
+                return;
+            }
+            else if (inputs[i].nodeName!="BUTTON")
+            {
+            valores_post[i] = inputs[i].value;
+            }
+        }
+
+        var idenvio = $(this).attr("data-idenvio");
+
+        $.ajax({
+            url : 'cliente/<?php echo $idusuario;?>/direcciones/' + idenvio + '/modificar',
+            type : 'POST',
+            data : {datos:valores_post},
             success:function (data) {
                 location.reload();
             }
