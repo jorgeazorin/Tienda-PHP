@@ -17,7 +17,7 @@ class Login extends CI_Controller {
   public function cerrarsesion() 
   {
     $this->session->sess_destroy();
-    redirect('/login');
+    redirect('/catalogo');
   }
 
 
