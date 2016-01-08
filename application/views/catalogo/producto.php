@@ -38,7 +38,7 @@
                     <div class="seller-info">
                         <div class="seller">
                             <div class="title">Vendido por</div>
-     <a class="store-lnk" target="_blank" href="/iw/catalogo/tienda/<?php echo($tienda->id); ?>" title="NO.1 Kitchen Supply  Mall">Tienda <?php echo($tienda->id); ?></a>
+     <a class="store-lnk" target="_blank" href="/iw/catalogo/tienda/<?php echo($tienda->id); ?>" title="">Tienda <?php echo($tienda->nombre); ?></a>
                             <div class="company-name notranslate">
                             </div>
                             <address><?php echo($tienda->localizacion); ?> </address>

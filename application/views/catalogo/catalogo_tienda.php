@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/iw/public/css/todo_catalogo.css">
 
     <main>
-        <h3>Catálogo de la tienda <?php echo($tienda->id) ?></h3>
+        <h3>Catálogo de la tienda <?php echo($tienda->nombre) ?></h3>
         <p><strong>Localización </strong> <?php echo($tienda->localizacion) ?></p>
         <p><strong>Información de contacto </strong> <?php echo($tienda->infocontacto) ?></p>
         <p><strong>Fecha de apertura: </strong> <?php echo($tienda->fechaapertura) ?></p>
