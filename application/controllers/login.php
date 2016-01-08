@@ -36,25 +36,7 @@ class Login extends CI_Controller {
       echo "admin"; //url para ir al bo del portal
     }
     else {
-      $this->load->model("Login_m",'', TRUE);
-      //AQUI LLAMADA A MODEL PARA COMPROBAR QUE EL LOGIN (YA SEA USERNAME O EMAIL) Y PASSWORD EXISTEN EN LA BD
-      //ENTONCES
-      $usuarioExiste = $this->Login_m->getUsuarioLogin($login,$password);
-      if($usuarioExiste!=FALSE)
-      {
-        $datos = array
-        (
-          'id' => $usuarioExiste->id,
-          'userName' => $usuarioExiste->userName,
-          'email' => $usuarioExiste->email,
-        );
-        $this->session->set_userdata($datos);
-        echo "paginaprincipal"; //url para ir a la pagina principal
-      }
-      else
-      {
-        echo "ERROR";
-      }
+      echo "ERROR";
     }
   }
 

@@ -5,7 +5,7 @@ class MY_Controller extends CI_Controller
 	{
 		if($this->session->userdata('userName')!="admin") //solo puede entrar el admin
 	    {
-	      redirect('/');
+	      redirect('/adminlogin');
 	    } 
 	}
 	public function __construct() 

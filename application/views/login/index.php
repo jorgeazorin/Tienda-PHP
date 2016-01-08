@@ -10,21 +10,21 @@
 			<div class="col-md-4 col-md-offset-4">
 	    		<div class="panel panel-default">
 				  	<div class="panel-heading">
-				    	<h3 class="panel-title">Inicia sesión</h3>
+				    	<h3 class="panel-title">Acceso restringido</h3>
 				 	</div>
 				  	<div class="panel-body">
 	                    <fieldset>
 				    	  	<div class="form-group">
-				    	  		<span id="error-nombre" style="color:red;display:none">AAA</span>
-				    		    <input class="form-control" placeholder="Nombre de usuario o email..." id="usuario">
+				    	  		<span id="error-nombre" style="color:red;display:none"></span>
+				    		    <input class="form-control" placeholder="Nombre de usuario..." id="usuario">
 				    		</div>
 				    		<div class="form-group">
-				    			<span id="error-password" style="color:red;display:none">AAA</span>
+				    			<span id="error-password" style="color:red;display:none"></span>
 				    			<input class="form-control" placeholder="Introduce tu contraseña..." id="password" type="password">
 				    		</div>
-				    		<button id="btn-login" class="btn btn-lg btn-success btn-block">Login</button>
-				    		¿No tienes cuenta?
-				    		<button class="btn btn-lg btn-info btn-block">Regístrate</button>
+				    		<button id="btn-login" class="btn btn-lg btn-warning btn-block">Login</button>
+				    		¿No eres un administrador?
+				    		<a href="/iw/index.php/cliente/login/" class="btn btn-lg btn-info btn-block">Inicia sesión en la tienda</a>
 
 				    	</fieldset>
 				    </div>
