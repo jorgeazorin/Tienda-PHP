@@ -23,7 +23,7 @@
                             <div class="current-price">
                                 <div id="product-price" class="ui-cost" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                     <b>
-                    <span itemprop="priceCurrency" content="EUR">€ </span><span id="sku-price" itemprop="price">9,24</span>
+                    <span itemprop="priceCurrency" content="EUR">€ </span><span id="sku-price" itemprop="price"><?php echo $producto[0]->precio;?></span>
                     </b> / unidad </div>
                             </div>
 
@@ -47,6 +47,7 @@
                                 <?php echo($tienda->infocontacto); ?>
                             </div>
                             <br><br>
+                            <?php if($this->session->userdata('userName')){ ?>
                             <div class="mensajeAtienda">
                                 <p>Envíar mensaje sobre el producto a la tienda</p>
                                 <form method="post" action="/iw/index.php/mensaje/enviaratienda/<?php echo($tienda->id); ?>/<?php echo($producto[0]->id); ?>">
@@ -54,6 +55,7 @@
                                     <button type="submit" class="btn btn-success" value="">Enviar</button>
                                 </form>
                             </div>
+                            <?php } ?>
                        </div>
                     </div>
                 </div>
