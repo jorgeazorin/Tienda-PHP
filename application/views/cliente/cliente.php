@@ -11,6 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Id pedido</th>
                     <th>estado</th>
                     <th>fecha</th>
                     <th></th>
@@ -21,6 +22,7 @@
                 $total=0;
                 foreach($pedidos as $pedido){ ?>
                 <tr>
+                    <td><?php echo($pedido->id); ?></td>
                     <td><?php echo($pedido->estado); ?></td>
                     <td><?php echo($pedido->fecha); ?></td>
                     <td><a href="/iw/index.php/pedido/verpedido/<?php echo($pedido->id); ?>">Ver</a></td>
@@ -35,7 +37,6 @@
         <table class="table">
             <thead>
                 <tr>
-                
                 <th>Tienda</th>
                 <th>Mensaje</th>
                 <th></th>
