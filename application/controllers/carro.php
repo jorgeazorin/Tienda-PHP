@@ -11,9 +11,21 @@ class Carro extends CI_Controller {
       $this->load->library('session');
       $this->load->library('Carrito');
       $carrito = new Carrito();
+      $session_username = $this->session->userdata('userName');
+      $data['username']=$session_username;
+      $this->load->model("direnvio_m",'', TRUE);
+      $session_id = $this->session->userdata('id');
+        $data['idusuario']=$session_id;
+
+      if($session_id){
+        $direcciones = $this->direnvio_m->getDirecciones($session_id);
+        $data['direcciones']=$direcciones;
+      }
       $data['carro'] = $carrito->get_content();
       $this->load->view('carro/verCarro.php', $data);
   }
+    
+    
     
     
   public function add($id,$cantidad){
