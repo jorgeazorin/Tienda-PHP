@@ -32,6 +32,17 @@ ol, ul {
   list-style: none;
 }
 
+.alert.alert-danger {
+    position: absolute;
+    top: 158px;
+    left: 0;
+    text-align: center;
+    right: 0;
+    max-width: 27%;
+    margin: auto;
+    z-index: 9999;
+}
+
 blockquote, q {
   quotes: none;
 }

@@ -82,10 +82,11 @@ class Cliente extends CI_Controller {
              header("Location: /iw/index.php/cliente/");
         }
     }
-    public function login(){
+    public function login($error=""){
         $this->load->library('session'); 
         $session_username = $this->session->userdata('userName'); 
-        $this->load->view('login/login.php');
+        $data['error']=$error;
+        $this->load->view('login/login.php',$data);
     }
     public function doLogin(){
         $this->load->library('session');
@@ -100,11 +101,9 @@ class Cliente extends CI_Controller {
                  header("Location: /iw/index.php/cliente/");
             }
             else
-                echo("login incorrecto");
-            header("Location: /iw/index.php/cliente/login/kjh");
+            header("Location: /iw/index.php/cliente/login/errorpassword");
         }else{
-            echo("usuario no existe");
-            header("Location: /iw/index.php/cliente/login/kjhj");
+            header("Location: /iw/index.php/cliente/login/erroruser");
         }
     }
     public function salir(){

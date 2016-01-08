@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="/iw/public/css/login.css">
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-<body>
+
 
   <section class="container">
-  
+      <?php 
+      if(strlen($error)>1){
+                  echo('<div class="alert alert-danger" role="alert"> <strong>Oh no!</strong> Usuario o contraseña incorrectos. </div>');
+      }
+      ?>
       <table><tr><td>
             <div class="login">
       <h1>Login a Aliexpress</h1>
