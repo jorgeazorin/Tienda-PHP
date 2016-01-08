@@ -7,7 +7,7 @@
 <div class="subcategorias">
 <ul>
     <?php foreach($categorias as $subcategoria){
-            echo('<li><a href="/iw/index.php/catalogo/categoria/'.$subcategoria->id.'">'.$subcategoria->nombre.'</a></li>');
+            echo('<li><a href="/iw/catalogo/categoria/'.$subcategoria->id.'">'.$subcategoria->nombre.'</a></li>');
         }
     ?>
 
@@ -20,7 +20,7 @@
         foreach ($TodoElCatalogo as $row){
   ?>
                 <div class="producto">
-                    <a href="/iw/index.php/catalogo/producto/<?php echo $row->id;?>" target="_blank">
+                    <a href="/iw/catalogo/producto/<?php echo $row->id;?>" target="_blank">
                         <div class="pro-img" style="background-image: url('/iw/public/img/<?php echo $row->id;?>.jpg');}">
                         </div>
                         <div class="pro-info">

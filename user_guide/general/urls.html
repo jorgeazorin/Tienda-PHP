@@ -94,7 +94,7 @@ contain functions that make it easy to work with your URI data.  In addition, yo
 
 <code>RewriteEngine on<br />
 RewriteCond $1 !^(index\.php|images|robots\.txt)<br />
-RewriteRule ^(.*)$ /index.php/$1 [L]</code>
+RewriteRule ^(.*)$ /$1 [L]</code>
 
 <p>In the above example, any HTTP request other than those for index.php, images, and robots.txt is treated as
 a request for your index.php file.</p>
@@ -105,11 +105,11 @@ a request for your index.php file.</p>
 <p>In your <dfn>config/config.php</dfn> file you can specify a suffix that will be added to all URLs generated
 by CodeIgniter.  For example, if a URL is this:</p>
 
-<code>example.com/index.php/products/view/shoes</code>
+<code>example.com/products/view/shoes</code>
 
 <p>You can optionally add a suffix, like <kbd>.html</kbd>, making the page appear to be of a certain type:</p>
 
-<code>example.com/index.php/products/view/shoes.html</code>
+<code>example.com/products/view/shoes.html</code>
 
 
 <h2>Enabling Query Strings</h2>

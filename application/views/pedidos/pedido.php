@@ -38,7 +38,7 @@
                     <td><?php echo($linpedpedido->precio*$linpedpedido->cantidad);?>€</td>
                     <?php if($pedido[0]->estado=='entregado'){
                         echo('<td>
-                         <form method="post" action="/iw/index.php/pedido/comentarlinped/'.$pedidoId.'/'.$linpedpedido->id.'">
+                         <form method="post" action="/iw/pedido/comentarlinped/'.$pedidoId.'/'.$linpedpedido->id.'">
                             <p>'.$linpedpedido->mensaje.'</p>
                             <p><input type="text" name="comentario" value="" placeholder="Deja tu comentario de este artículo"></p>
                             <input type="submit" name="commit" value="Comentar"></p>

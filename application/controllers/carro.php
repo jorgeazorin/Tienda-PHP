@@ -42,7 +42,7 @@ class Carro extends CI_Controller {
             "nombre"		=>		 $producto[0]->nombre
         );
     $carrito->add($articulo);
-    header("Location: /iw/index.php/carro/");
+    header("Location: /iw/carro/");
 
   }
     
@@ -51,14 +51,14 @@ class Carro extends CI_Controller {
       $this->load->library('Carrito');
       $carrito = new Carrito();
       $carrito->remove_producto($unique_id);
-      header("Location: /iw/index.php/carro/");
+      header("Location: /iw/carro/");
   }
 
   public function limpiarCarrlo(){
       $this->load->library('session');
     $this->load->library('Carrito');
     $carrito->destroy();
-      header("Location: /iw/index.php/carro/");
+      header("Location: /iw/carro/");
   }
 
 }

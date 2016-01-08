@@ -3,7 +3,7 @@
   // $this->load->view('inc/categorias');
 ?>
 <main>
-<form method="post" action="/iw/index.php/pedido/realizarpedido/">
+<form method="post" action="/iw/pedido/realizarpedido/">
     <?php 
       if(strlen($errorenvio)>1){
                   echo('<div class="alert alert-danger" role="alert"> <strong>Oh no!</strong> Añada una dirección de envío. </div>');
@@ -31,12 +31,12 @@
             foreach ($carro as $row){
 ?>
         <tr>
-            <td> <a href="/iw/index.php/catalogo/producto/<?php echo $row["id"];?>"><div class="pro-img" style="background-image: url('/iw/public/img/<?php echo $row["id"];?>.jpg');"></div></a></td>
+            <td> <a href="/iw/catalogo/producto/<?php echo $row["id"];?>"><div class="pro-img" style="background-image: url('/iw/public/img/<?php echo $row["id"];?>.jpg');"></div></a></td>
             <td><?php echo $row["nombre"];?></td>
             <td><?php echo $row["cantidad"];?></td>
             <td><?php echo $row["precio"];?>€</td>
             <td><?php echo ($row["precio"]*$row["cantidad"]);$total+=($row["precio"]*$row["cantidad"]);?>€</td>
-            <td><a href="/iw/index.php/carro/delete/<?php echo $row["unique_id"];?>">Eliminar</a></td>
+            <td><a href="/iw/carro/delete/<?php echo $row["unique_id"];?>">Eliminar</a></td>
         </tr>
 <?php
         }
@@ -249,7 +249,7 @@ box-shadow: 0 3px 6px 0 rgba(51,51,51,.298039)
             }
         }
         $.ajax({
-        url : '/iw/index.php/cliente/<?php echo $idusuario;?>/direcciones/crear',
+        url : '/iw/cliente/<?php echo $idusuario;?>/direcciones/crear',
         type : 'POST',
         data : {datos:valores_post},
         success:function (data) {

@@ -19,7 +19,7 @@
       <table><tr><td>
             <div class="login">
       <h1>Login a Aliexpress</h1>
-           <form method="post" action="/iw/index.php/cliente/doLogin">
+           <form method="post" action="/iw/cliente/doLogin">
         <p><input type="text" name="login" value="" placeholder="Nombre de Usuario"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
         <p class="remember_me">
@@ -33,7 +33,7 @@
           <td>
                <div class="login">
       <h1>Registrarse en Aliexpress</h1>
-          <form method="post" action="/iw/index.php/cliente/doRegistro">
+          <form method="post" action="/iw/cliente/doRegistro">
         <p><input type="text" name="login" value="" placeholder="Nombre de Usuario"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
           <p><input type="text" name="email" value="" placeholder="email"></p>

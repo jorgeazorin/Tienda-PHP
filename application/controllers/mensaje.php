@@ -16,7 +16,7 @@ class Mensaje extends CI_Controller {
           
           $this->load->model("mensaje_m",'', TRUE);
           $this->mensaje_m->enviaratienda($idTienda, $session_id, $mensaje);
-              header("Location: /iw/index.php/cliente/");
+              header("Location: /iw/cliente/");
 
       }
   }
@@ -24,7 +24,7 @@ class Mensaje extends CI_Controller {
 
           $this->load->model("mensaje_m",'', TRUE);
           $this->mensaje_m->eliminar($id);
-              header("Location: /iw/index.php/cliente/");
+              header("Location: /iw/cliente/");
 
   } 
 

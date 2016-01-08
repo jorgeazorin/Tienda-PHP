@@ -24,7 +24,7 @@
 				    		</div>
 				    		<button id="btn-login" class="btn btn-lg btn-warning btn-block">Login</button>
 				    		¿No eres un administrador?
-				    		<a href="/iw/index.php/cliente/login/" class="btn btn-lg btn-info btn-block">Inicia sesión en la tienda</a>
+				    		<a href="/iw/cliente/login/" class="btn btn-lg btn-info btn-block">Inicia sesión en la tienda</a>
 
 				    	</fieldset>
 				    </div>

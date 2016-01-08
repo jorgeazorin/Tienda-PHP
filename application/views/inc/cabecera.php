@@ -35,8 +35,8 @@
                     else if($this->session->userdata('userName')!=false)
                     {
                         ?>
-                        <li><a href="/iw/index.php/catalogo/"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>Catálogo</a></li>
-                        <li><a href="/iw/index.php/carro/"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Carrito</a></li>
+                        <li><a href="/iw/catalogo/"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>Catálogo</a></li>
+                        <li><a href="/iw/carro/"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Carrito</a></li>
                         <li><a href="/iw/logout"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Logout</a></li>
                         <li><a href="/iw/cliente"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Usuario</a></li>
                         <?php
@@ -45,8 +45,8 @@
                     else 
                     {    
                     ?>
-                    <li><a href="/iw/index.php/catalogo/"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>Catálogo</a></li>
-                    <li><a href="/iw/index.php/cliente/login/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Login</a></li>
+                    <li><a href="/iw/catalogo/"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>Catálogo</a></li>
+                    <li><a href="/iw/cliente/login/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Login</a></li>
                     <?php
                     }
                     ?>

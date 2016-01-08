@@ -100,7 +100,7 @@ second the size of the heading.  Example:</p>
 // gives &lt;img src=&quot;http://site.com/images/picture.jpg&quot; /&gt;</code>
 <p>There is an optional second parameter that is a TRUE/FALSE value that specifics if the src should have the page specified by $config['index_page'] added to the address it creates. Presumably, this would be if you were using a media controller.</p>
 <p><code>echo img('images/picture.jpg', TRUE);<br />
-// gives &lt;img src=&quot;http://site.com/index.php/images/picture.jpg&quot; alt=&quot;&quot; /&gt;</code></p>
+// gives &lt;img src=&quot;http://site.com/images/picture.jpg&quot; alt=&quot;&quot; /&gt;</code></p>
 <p>Additionally, an associative array can be passed to the img() function for complete control over all attributes and values. If an alt attribute is not provided, CodeIgniter will generate an empty string.</p>
 <p><code> $image_properties = array(<br />
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'src' =&gt; 'images/picture.jpg',<br />
@@ -113,7 +113,7 @@ second the size of the heading.  Example:</p>
 	);<br />
 	<br />
 	img($image_properties);<br />
-	// &lt;img src=&quot;http://site.com/index.php/images/picture.jpg&quot; alt=&quot;Me, demonstrating how to eat 4 slices of pizza at one time&quot; class=&quot;post_images&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;That was quite a night&quot; rel=&quot;lightbox&quot; /&gt;</code></p>
+	// &lt;img src=&quot;http://site.com/images/picture.jpg&quot; alt=&quot;Me, demonstrating how to eat 4 slices of pizza at one time&quot; class=&quot;post_images&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;That was quite a night&quot; rel=&quot;lightbox&quot; /&gt;</code></p>
 
 <h2><a name="link_tag"></a>link_tag()</h2>
 <p>Lets you create HTML &lt;link /> tags.  This is useful for stylesheet links, as well as other links. The parameters are href, with optional rel, type, title, media and index_page. index_page is a TRUE/FALSE value that specifics if the href should have the page specified by $config['index_page'] added to the address it creates.<code>

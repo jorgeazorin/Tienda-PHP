@@ -38,9 +38,9 @@ class Pedido extends CI_Controller {
             $cesta = $carrito->get_content();
             $this->pedido_m->realizarPedidoCliente($cesta, $session_id, $direnvio);
             $carrito->destroy();
-            header("Location: /iw/index.php/cliente/");
+            header("Location: /iw/cliente/");
         }else{
-            header("Location: /iw/index.php/carro/errorenvio");
+            header("Location: /iw/carro/errorenvio");
         }
         
     }
@@ -48,7 +48,7 @@ class Pedido extends CI_Controller {
         $this->load->model("pedido_m",'', TRUE);
         $comentario = $_POST['comentario'];
         $this->pedido_m->comentarlinped($id,$comentario);
-                header("Location: /iw/index.php/pedido/verpedido/".$pedidoId);
+                header("Location: /iw/pedido/verpedido/".$pedidoId);
 
     }
 }

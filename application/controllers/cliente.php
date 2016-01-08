@@ -17,7 +17,7 @@ class Cliente extends CI_Controller {
         $data['pedidos']=$pedidos;
         $data['username']=$session_username;
         if(!$session_username){
-            header("Location: /iw/index.php/cliente/login/");
+            header("Location: /iw/cliente/login/");
         }
         $data['email']= $session_email;
 
@@ -81,7 +81,7 @@ class Cliente extends CI_Controller {
         if($cliente){
             $this->session->set_userdata($cliente[0]);                
             echo("Registro correcto");
-             header("Location: /iw/index.php/cliente/");
+             header("Location: /iw/cliente/");
         }
     }
     public function login($error=""){
@@ -100,16 +100,16 @@ class Cliente extends CI_Controller {
             if($password==$cliente[0]->password){
                 $this->session->set_userdata($cliente[0]);                
                 echo("Login correcto");
-                 header("Location: /iw/index.php/cliente/");
+                 header("Location: /iw/cliente/");
             }
             else
-            header("Location: /iw/index.php/cliente/login/errorpassword");
+            header("Location: /iw/cliente/login/errorpassword");
         }else{
-            header("Location: /iw/index.php/cliente/login/erroruser");
+            header("Location: /iw/cliente/login/erroruser");
         }
     }
     public function salir(){
         unset($_SESSION['usuario']);
-        header("Location: /iw/index.php/catalogo/");
+        header("Location: /iw/catalogo/");
     }
 }
