@@ -12,7 +12,6 @@
             <thead>
                 <tr>
                     <th>estado</th>
-                    <th>total</th>
                     <th>fecha</th>
                     <th></th>
                 </tr>
@@ -23,7 +22,6 @@
                 foreach($pedidos as $pedido){ ?>
                 <tr>
                     <td><?php echo($pedido->estado); ?></td>
-                    <td><?php echo($pedido->total); ?></td>
                     <td><?php echo($pedido->fecha); ?></td>
                     <td><a href="/iw/index.php/pedido/verpedido/<?php echo($pedido->id); ?>">Ver</a></td>
                 </tr>
