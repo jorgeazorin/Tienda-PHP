@@ -7,6 +7,11 @@
 	<a href="<?php echo base_url(); ?>admin" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
 	<h1><?php echo $titulo; ?> <?php echo $nombretienda; ?></h1>
 
+	<ol class="breadcrumb">
+  		<li><a href="/iw/admin">Principal</a></li>
+  		<li class="active"><?php echo $nombretienda; ?></li>
+	</ol>
+
 	<?php
 
 	if(!is_null($lista)) 
