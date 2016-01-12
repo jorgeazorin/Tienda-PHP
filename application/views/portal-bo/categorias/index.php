@@ -5,13 +5,11 @@
 <link href = "<?php echo base_url(); ?>assets/css/lista-categorias.css” rel=”stylesheet" type="text/css" />
 
 <main>
-	<a href="<?php echo base_url(); ?>admin" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
-	<h1><?php echo $titulo; ?></h1>
-
 <ol class="breadcrumb">
   <li><a href="/iw/admin">Principal</a></li>
   <li class="active">Categorías</li>
 </ol>
+	<h1><?php echo $titulo; ?></h1>
 
 <div class="just-padding">
 	<div class="list-group list-group-root well">

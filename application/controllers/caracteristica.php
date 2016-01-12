@@ -41,7 +41,7 @@ class Caracteristica extends MY_Controller {
     $this->Caracteristica_m->borrar($idcaracteristica);
   }
 
-  public function editar($idcaracteristica,$nombre,$stock)
+  public function editar($idcaracteristica)
   {
     $this->load->model("Caracteristica_m",'', TRUE);
     $nombre = $_POST['nombre'];
