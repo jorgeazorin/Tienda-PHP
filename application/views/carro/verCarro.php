@@ -232,7 +232,8 @@ box-shadow: 0 3px 6px 0 rgba(51,51,51,.298039)
 <script>
     $(document).ready(function () {
     
- $(".btn-crear").click(function() {
+ $(".btn-crear").click(function(e) {
+        e.preventDefault();
         var valores_post = [];
         $(".error").hide(); //escondemos errores
         var inputs = $(".panel-crear").find(":input"); //limpiamos
