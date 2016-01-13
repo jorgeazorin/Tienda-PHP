@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="/iw/public/css/todo_catalogo.css">
 <div class="subcategorias">
 <ul>
+        <li><a href="/iw/catalogo/">Todos los artículos</a></li>
+
     <?php foreach($categorias as $subcategoria){
             echo('<li><a href="/iw/catalogo/categoria/'.$subcategoria->id.'">'.$subcategoria->nombre.'</a></li>');
         }
@@ -26,8 +28,8 @@
                         <div class="pro-img" style="background-image: url('/iw/public/img/<?php echo $row->id;?>.jpg');}">
                         </div>
                         <div class="pro-info">
-                            <div class="g-orders"> 284 vendidos</div>
-                            <span class="g-price">US $<?php echo $row->precio;?></span>
+                            <div class="g-orders"><?php echo $row->nombre;?></div>
+                            <span class="g-price"><?php echo $row->precio;?>€</span>
                             <span class="g-orders categoria"><?php echo $row->catnombre;?></span>
                         </div>
                     </a>
