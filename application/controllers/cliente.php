@@ -81,7 +81,7 @@ class Cliente extends CI_Controller {
         if($cliente){
             $this->session->set_userdata($cliente[0]);                
             echo("Registro correcto");
-             header("Location: /iw/cliente/");
+             header("Location: /iw/cliente");
         }
     }
     public function login($error=""){
@@ -100,7 +100,7 @@ class Cliente extends CI_Controller {
             if($password==$cliente[0]->password){
                 $this->session->set_userdata($cliente[0]);                
                 echo("Login correcto");
-                 header("Location: /iw/cliente/");
+                 header("Location: /iw/cliente");
             }
             else
             header("Location: /iw/cliente/login/errorpassword");
