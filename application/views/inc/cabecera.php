@@ -27,6 +27,7 @@
                     {
                         ?>
                         <li><a href="/iw/admin"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Ir a principal</a></li>
+                        <li><a href="/iw/admin/categorias"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administrar categorías</a></li>
                         <li><a href="/iw/login/cerrarsesion"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Salir</a></li>
                         <?php
                     } 

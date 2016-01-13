@@ -4,7 +4,11 @@
 
 
 <main>
-	<a href="<?php echo base_url(); ?>admin/tiendas/<?php echo $idtienda; ?>" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
+	<ol class="breadcrumb">
+		<li><a href="/iw/admin">Principal</a></li>
+		<li><a href="/iw/admin/tiendas/<?php echo $idtienda; ?>"><?php echo $nombretienda; ?></a></li>
+		<li class="active"><?php echo $nombreprod ?></li>
+	</ol>
 	<h1><?php echo $titulo . " " . $nombreprod ?></h1>
 
 	

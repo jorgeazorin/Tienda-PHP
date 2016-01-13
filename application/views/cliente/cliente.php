@@ -92,7 +92,7 @@
 
             ?>
 
-            <div class="panel panel-default panel-editar">
+            <div id="<?php echo $direccion->id; ?>" class="panel panel-default panel-editar">
               <!-- Default panel contents -->
               <div class="panel-heading"><i class="glyphicon glyphicon-user"></i> <?php echo($username);?></div>
               <span class="error" style="color:red;display:none">Campos obligatorios</span>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="row">
                         <button data-idenvio="<?php echo $direccion->id; ?>" class="btn btn-warning btn-guardarcambios" style="display:none">Guardar</button>
-                        <button type="button" class="btn btn-link btn-editar">Modificar</button>|
+                        <button data-idenvio="<?php echo $direccion->id; ?>" type="button" class="btn btn-link btn-editar">Modificar</button>|
                         <button type="button" data-idborrar="<?php echo $direccion->id; ?>" class="btn btn-link btn-borrar">Eliminar</button>
                     </div>
                 </div>
@@ -153,8 +153,13 @@ $(document).ready(function () {
     });
 
     $('.btn-editar').click(function() {
-        var labels = $(".panel-editar").find("label");
-        var inputs = $(".panel-editar").find(":input");
+        var id = $(this).attr("data-idenvio");
+        var selector = "#" + id + ".panel-editar";
+
+        console.log(selector);
+
+        var labels = $(selector).find("label");
+        var inputs = $(selector).find(":input");
         if( labels.is(":visible"))
         {
             inputs.show();
@@ -175,13 +180,15 @@ $(document).ready(function () {
     })
 
     $(".btn-guardarcambios").click(function() {
+        var id = $(this).attr("data-idenvio");
+        var selector = "#" + id + ".panel-editar";
         var valores_post = [];
-        var inputs = $(".panel-editar").find(":input");
+        var inputs = $(selector).find(":input");
         for(var i = 0; i<inputs.length;i++) {
             if(inputs[i].value=="" && inputs[i].nodeName!="BUTTON")
             {
                 //error
-                $(".panel-editar").find(".error")[0].style.display="inline";
+                $(selector).find(".error")[0].style.display="inline";
                 return;
             }
             else if (inputs[i].nodeName!="BUTTON")

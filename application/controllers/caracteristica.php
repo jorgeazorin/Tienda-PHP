@@ -13,6 +13,8 @@ class Caracteristica extends MY_Controller {
     $this->load->model("Caracteristica_m",'', TRUE);
     $data['idprod']=$idprod;
     $data['idtienda']=$idtienda;
+    $this->load->model("Tienda_m",'', TRUE);
+    $data['nombretienda'] = $this->Tienda_m->getTienda($idtienda)->nombre;
 
     $this->load->model("Producto_m",'', TRUE);
     $data['nombreprod'] = $this->Producto_m->getProducto($idprod)->nombre;
@@ -39,7 +41,7 @@ class Caracteristica extends MY_Controller {
     $this->Caracteristica_m->borrar($idcaracteristica);
   }
 
-  public function editar($idcaracteristica,$nombre,$stock)
+  public function editar($idcaracteristica)
   {
     $this->load->model("Caracteristica_m",'', TRUE);
     $nombre = $_POST['nombre'];
