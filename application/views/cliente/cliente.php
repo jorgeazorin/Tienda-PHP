@@ -25,7 +25,7 @@
                     <td><?php echo($pedido->id); ?></td>
                     <td><?php echo($pedido->estado); ?></td>
                     <td><?php echo($pedido->fecha); ?></td>
-                    <td><a href="/iw/index.php/pedido/verpedido/<?php echo($pedido->id); ?>">Ver</a></td>
+                    <td><a href="/iw/pedido/verpedido/<?php echo($pedido->id); ?>">Ver</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -46,9 +46,9 @@
                  <?php 
                 foreach($mensajes as $mensaje){ ?>
                 <tr>
-                    <td><a href="/iw/index.php/catalogo/tienda/<?php echo($mensaje->tiendaId); ?>"><?php echo($mensaje->nombre); ?></a></td>
+                    <td><a href="/iw/catalogo/tienda/<?php echo($mensaje->tiendaId); ?>"><?php echo($mensaje->nombre); ?></a></td>
                     <td><?php echo($mensaje->texto); ?></td>
-                    <td><a href="/iw/index.php/mensaje/eliminar/<?php echo($mensaje->id); ?>">Eliminar</a></td>
+                    <td><a href="/iw/mensaje/eliminar/<?php echo($mensaje->id); ?>">Eliminar</a></td>
                 </tr>
                 <?php }?>
             </tbody>

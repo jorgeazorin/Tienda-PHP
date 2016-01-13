@@ -30,7 +30,7 @@
                         </dd>
                     </dl>
                     <div class="buy-now">
-                        <a id="buy-now" class="buy-now-btn" href="/iw/index.php/carro/add/<?php echo($producto[0]->id); ?>/1" data-batman-id="iira0hnd" data-widget-cid="widget-10">Comprar ahora</a>
+                        <a id="buy-now" class="buy-now-btn" href="/iw/carro/add/<?php echo($producto[0]->id); ?>/1" data-batman-id="iira0hnd" data-widget-cid="widget-10">Comprar ahora</a>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                             <?php if($this->session->userdata('userName')){ ?>
                             <div class="mensajeAtienda">
                                 <p>Envíar mensaje sobre el producto a la tienda</p>
-                                <form method="post" action="/iw/index.php/mensaje/enviaratienda/<?php echo($tienda->id); ?>/<?php echo($producto[0]->id); ?>">
+                                <form method="post" action="/iw/mensaje/enviaratienda/<?php echo($tienda->id); ?>/<?php echo($producto[0]->id); ?>">
                                 <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
                                     <button type="submit" class="btn btn-success" value="">Enviar</button>
                                 </form>
