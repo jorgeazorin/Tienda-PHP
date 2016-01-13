@@ -19,7 +19,7 @@
 <body>
     <div class="cabecera">
         <div class="titulocabecera">
-            <div class="logo_img"></div>
+            <a href="/iw/"><div class="logo_img"></div></a>
             <div class="menu">
                 <ul>
                     <?php
